@@ -135,8 +135,8 @@ pytz = "*"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.7"
-content-hash = "d2bbedf9186a183777d4b2734025523b7ce3947c40d3a8f66b8598a2e1d84eb6"
+python-versions = "3.7.9"
+content-hash = "06fbfb71443e79a8136a7dfd53ac13e07b480164f91fdc357804837d091e6e5c"
 
 [metadata.files]
 apscheduler = [
