@@ -4,7 +4,6 @@
 """
 Echo Bot: just replies to Telegram messages.
 """
-import os
 import logging
 
 import wolframalpha
@@ -136,9 +135,7 @@ def main():
     # Start http server to listen for updates via webhook.
     # Original reason to run this server is to keep my dyno
     # running in Heroku.
-    logger.debug('env PORT=%s' % os.getenv('PORT'))
-    updater.start_webhook(port=os.getenv('PORT', 80))
-    logger.debug("HTTP server started.")
+    updater.start_webhook(host='0.0.0.0', port=os.getenv('PORT', 80))
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
