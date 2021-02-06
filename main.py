@@ -30,7 +30,7 @@ from math_problem import (
 )
 
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG
 )
 
 logger = logging.getLogger(__name__)
@@ -136,7 +136,9 @@ def main():
     # Start http server to listen for updates via webhook.
     # Original reason to run this server is to keep my dyno
     # running in Heroku.
+    logger.debug('env PORT=%s' % os.getenv('PORT'))
     updater.start_webhook(port=os.getenv('PORT', 80))
+    logger.debug("HTTP server started.")
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
