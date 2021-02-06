@@ -4,6 +4,7 @@
 """
 Echo Bot: just replies to Telegram messages.
 """
+import os
 import logging
 
 import wolframalpha
@@ -131,6 +132,11 @@ def theory_command(update: Update, context: CallbackContext) -> None:
 def main():
     """Starts the bot."""
     updater = Updater("1664508454:AAGwZ1rSk55nNFeYNvwYv-39k2AWGTJKXBg", use_context=True)
+
+    # Start http server to listen for updates via webhook.
+    # Original reason to run this server is to keep my dyno
+    # running in Heroku.
+    updater.start_webhook(port=os.getenv('PORT', 80))
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
