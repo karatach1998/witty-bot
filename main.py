@@ -136,7 +136,7 @@ def main():
     # Start http server to listen for updates via webhook.
     # Original reason to run this server is to keep my dyno
     # running in Heroku.
-    updater.start_webhook(host='0.0.0.0', port=os.getenv('PORT', 80))
+    updater.start_webhook(listen='0.0.0.0', port=os.getenv('PORT', 80))
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
