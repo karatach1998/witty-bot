@@ -5,7 +5,9 @@
 Echo Bot: just replies to Telegram messages.
 """
 import os
+import threading
 import logging
+from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 import wolframalpha
 from sympy.parsing.latex import parse_latex
@@ -34,6 +36,23 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
+
+
+class StaticHTTPRequestHandler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super(StaticHTTPRequestHandler, self).__init__(
+            *args, directory=os.path.join(os.getcwd(), 'static'), **kwargs)
+
+
+class StaticHTTPServer(threading.Thread):
+    def __init__(self, server_address):
+        super(StaticHTTPServer, self).__init__(daemon=True)
+        self.server_address = server_address
+        self.httpd = HTTPServer(self.server_address, StaticHTTPRequestHandler)
+
+    def run(self):
+        logger.info("Starting simple httpd on port %s", self.httpd.server_port)
+        self.httpd.serve_forever()
 
 
 def start_command(update: Update, context: CallbackContext) -> None:
@@ -131,12 +150,14 @@ def theory_command(update: Update, context: CallbackContext) -> None:
 
 def main():
     """Starts the bot."""
-    updater = Updater("1664508454:AAGwZ1rSk55nNFeYNvwYv-39k2AWGTJKXBg", use_context=True)
+    updater = Updater("1664508454:AAGwZ1rSk55nNFeYNvwYv-39k2AWGTJKXBg",
+                      use_context=True)
 
-    # Start http server to listen for updates via webhook.
-    # Original reason to run this server is to keep my dyno
-    # running in Heroku.
-    updater.start_webhook(listen='0.0.0.0', port=os.getenv('PORT', 80))
+    # Run simple http server in background that only gives Bot's
+    # home page. Original reason to run this server is to keep my
+    # dyno running in Heroku.
+    server = StaticHTTPServer(('0.0.0.0', int(os.getenv('PORT', 80))))
+    server.start()
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
