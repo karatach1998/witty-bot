@@ -19,7 +19,7 @@ def get_new_joke():
         if not time_span:
             return None
         post_time = rutimeparser.parse(time_span[0].text)
-        return post_time > last_joke_time
+        return post_time and post_time > last_joke_time
 
     actual_posts = filter(actual_post, posts)
     post = next(actual_posts, None)

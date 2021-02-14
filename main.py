@@ -71,8 +71,16 @@ def echo(update: Update, context: CallbackContext) -> None:
 
 def send_joke(context: CallbackContext):
     joke = get_new_joke()
+    job = context.job
     if joke is not None:
-        context.bot.send_message('@Witty0Bot', joke or 'Шуток нет, но вы держитесь!')
+        context.bot.send_message(job.context, joke)
+
+
+def joke_command(update: Update, context: CallbackContext) -> None:
+    chat_id =  update.message.chat_id
+    context.job_queue.run_repeating(send_joke, timedelta(seconds=10), context=chat_id, name='joker_%s' % chat_id)
+    joke = get_new_joke() or "Жди! Сам жду."
+    update.message.reply_text(joke)
 
 
 def integral_menu(context: CallbackContext):
@@ -167,16 +175,14 @@ def main():
     server = StaticHTTPServer(('0.0.0.0', int(os.getenv('PORT', 80))))
     server.start()
 
-    job_queue = updater.job_queue
-
-    job_queue.run_repeating(send_joke, timedelta(hours=1), 0)
-
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
 
     # on different commands - answer in Telegram
     dispatcher.add_handler(CommandHandler('start', start_command))
     dispatcher.add_handler(CommandHandler('help', help_command))
+
+    dispatcher.add_handler(CommandHandler('joke', joke_command))
 
     # on noncommand i.e message - echo the message on Telegram
     # dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
