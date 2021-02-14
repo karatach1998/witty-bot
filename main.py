@@ -8,6 +8,7 @@ import os
 import threading
 import logging
 from http.server import HTTPServer, SimpleHTTPRequestHandler
+from datetime import timedelta
 
 import wolframalpha
 from sympy.parsing.latex import parse_latex
@@ -30,6 +31,7 @@ import latex2png
 from math_problem import (
     get_integral_subjects, get_integral_problem, get_integral_theory,
 )
+from joker import get_new_joke
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -65,6 +67,12 @@ def help_command(update: Update, context: CallbackContext) -> None:
 
 def echo(update: Update, context: CallbackContext) -> None:
     update.message.reply_text("%s)" % update.message.text)
+
+
+def send_joke(context: CallbackContext):
+    joke = get_new_joke()
+    if joke is not None:
+        context.bot.send_message('@Witty0Bot', joke or 'Шуток нет, но вы держитесь!')
 
 
 def integral_menu(context: CallbackContext):
@@ -158,6 +166,10 @@ def main():
     # dyno running in Heroku.
     server = StaticHTTPServer(('0.0.0.0', int(os.getenv('PORT', 80))))
     server.start()
+
+    job_queue = updater.job_queue
+
+    job_queue.run_repeating(send_joke, timedelta(hours=1))
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
