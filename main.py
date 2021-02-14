@@ -169,7 +169,7 @@ def main():
 
     job_queue = updater.job_queue
 
-    job_queue.run_repeating(send_joke, timedelta(hours=1))
+    job_queue.run_repeating(send_joke, timedelta(hours=1), 0)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
