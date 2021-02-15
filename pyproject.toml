@@ -11,6 +11,10 @@ matplotlib = "^3.3"
 sympy = "^1.7"
 wolframalpha = "^4.1"
 antlr4-python3-runtime = "^4.9"
+PyPDF2 = "^1.26.0"
+rutimeparser = "^1.1.1"
+lxml = "^4.6.2"
+requests = "^2.25.1"
 
 [tool.poetry.dev-dependencies]
 
