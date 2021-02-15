@@ -78,7 +78,7 @@ def send_joke(context: CallbackContext):
 
 def joke_command(update: Update, context: CallbackContext) -> None:
     chat_id =  update.message.chat_id
-    context.job_queue.run_repeating(send_joke, timedelta(seconds=10), context=chat_id, name='joker_%s' % chat_id)
+    context.job_queue.run_repeating(send_joke, timedelta(hours=1), context=chat_id, name='joker_%s' % chat_id)
     joke = get_new_joke() or "Жди! Сам жду."
     update.message.reply_text(joke)
 
