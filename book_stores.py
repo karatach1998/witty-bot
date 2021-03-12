@@ -1,9 +1,9 @@
 import io
-from tempfile import NamedTemporaryFile
+import json
 
 import requests
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
 from yadisk import YaDisk
 
 import config
@@ -11,19 +11,24 @@ from books import AbstractBookStore, BookStoreContainer
 
 
 class GDriveBookStore(AbstractBookStore):
-    def __init__(self, client_secrets_str):
-        with NamedTemporaryFile(
-            mode="w+", dir=config.PROJECT_DIR, prefix="client_secrets", suffix="json"
-        ) as f:
-            f.write(client_secrets_str)
-            self._gauth = GoogleAuth()
-            self._gauth.LocalWebserverAuth()
-        self.drive = GoogleDrive(self._gauth)
+    SCOPES = [
+        "https://www.googleapis.com/auth/drive.readonly",
+        "https://www.googleapis.com/auth/drive.metadata.readonly",
+    ]
+
+    def __init__(self, service_account_info_str):
+        creds = service_account.Credentials.from_service_account_info(
+            json.loads(service_account_info_str), scopes=GDriveBookStore.SCOPES
+        )
+        self.drive = build("drive", "v3", credentials=creds)
 
     def get_book_content(self, book):
-        file = self.drive.CreateFile({"id": book.location["file_id"]})
-        file.FetchContent()
-        return file.content
+        data = (
+            self.drive.files()  # pylint: disable=no-member
+            .get_media(fileId=book.location["file_id"])
+            .execute()
+        )
+        return io.BytesIO(data)
 
 
 class YaDiskBookStore(AbstractBookStore):
@@ -44,7 +49,7 @@ class UrlBookStore(AbstractBookStore):
 
 BOOK_STORE_CONTAINER = BookStoreContainer(
     {
-        "gdrive": GDriveBookStore(config.GOOGLE_AUTH_CLIENT_SECRETS),
+        "gdrive": GDriveBookStore(config.GOOGLE_SERVICE_ACCOUNT_INFO),
         "yadisk": YaDiskBookStore(config.YANDEX_DISK_TOKEN),
         "url": UrlBookStore(),
     }
