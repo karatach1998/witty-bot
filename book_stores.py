@@ -36,9 +36,9 @@ class YaDiskBookStore(AbstractBookStore):
         self._y = YaDisk(token=token)
 
     def get_book_content(self, book):
-        with io.BytesIO() as f:
-            self._y.download(book.location["path"], f)
-            return f
+        f = io.BytesIO()
+        self._y.download(book.location["path"], f)
+        return f
 
 
 class UrlBookStore(AbstractBookStore):
