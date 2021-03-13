@@ -1,7 +1,7 @@
 import io
-from typing import Dict
 from dataclasses import dataclass
 from itertools import chain
+from typing import Dict
 
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
@@ -50,9 +50,11 @@ class Book:
         return self._content
 
     def get_page_range_pdf(self, start, end):
+        assert start < end
+
         pdf = PdfFileReader(self.content)
         page_range_pdf = PdfFileWriter()
-        for page in pdf.pages[start : end + 1]:
+        for page in pdf.pages[start:end + 1]:
             page_range_pdf.addPage(page)
 
         with io.BytesIO() as stream:
