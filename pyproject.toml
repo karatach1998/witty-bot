@@ -6,7 +6,6 @@ authors = ["Sergey Karatach <karatach1998@yandex.ru>"]
 
 [tool.poetry.dependencies]
 python = "3.7.9"
-python-telegram-bot = "^13.3"
 matplotlib = "^3.3"
 sympy = "^1.7"
 wolframalpha = "^4.1"
@@ -19,6 +18,7 @@ google-auth-oauthlib = "^0.4.3"
 google-api-python-client = "^2.0.2"
 google-auth-httplib2 = "^0.1.0"
 pylint = "2.7.1"
+python-telegram-bot = "^13.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"

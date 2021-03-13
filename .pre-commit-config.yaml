@@ -4,12 +4,18 @@ repos:
     hooks:
       - id: isort
         name: isort (python)
+        args: ["--profile=black"]
   - repo: https://github.com/google/yapf
     rev: v0.31.0
     hooks:
       - id: yapf
         entry: bash -c 'yapf "$@"' --
-        args: ["-i", "--style={based_on_style=pep8, coalesce_brackets=true, dedent_closing_brackets=true, space_between_ending_comma_and_closing_bracket=false}"]
+        args: ["-i", "--style={
+            based_on_style=pep8,
+            coalesce_brackets=true,
+            dedent_closing_brackets=true,
+            space_between_ending_comma_and_closing_bracket=false
+            }"]
   - repo: local
     hooks:
       - id: pylint
