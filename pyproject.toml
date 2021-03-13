@@ -14,7 +14,6 @@ antlr4-python3-runtime = "^4.9"
 yadisk = "^1.2.14"
 PyYAML = "^5.4.1"
 pyramid = "^2.0"
-pre-commit = "^2.11.0"
 google-auth = "^1.27.1"
 google-auth-oauthlib = "^0.4.3"
 google-api-python-client = "^2.0.2"
@@ -24,6 +23,8 @@ google-auth-httplib2 = "^0.1.0"
 pytest = "^6.2.2"
 pre-commit = "^2.10.1"
 pylint = "^2.7.1"
+yapf = "^0.30.0"
+toml = "^0.10.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
