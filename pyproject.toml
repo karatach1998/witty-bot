@@ -19,6 +19,7 @@ google-api-python-client = "^2.0.2"
 google-auth-httplib2 = "^0.1.0"
 pylint = "2.7.1"
 python-telegram-bot = "^13.3"
+PyPDF2 = "^1.26.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
