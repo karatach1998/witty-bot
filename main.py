@@ -28,10 +28,8 @@ class HTTPServer(threading.Thread):
         self.server_address = (server_host, server_port) = server_address
 
         with Configurator() as cfg:
-            cfg.add_static_viewcontroller(name="static", path="static")
-            cfg.add_static_viewcontroller(
-                name="media", path=str(config.MEDIA_PATH)
-            )
+            cfg.add_static_view(name="static", path="static")
+            cfg.add_static_view(name="media", path=str(config.MEDIA_PATH))
             main_coordinator = cfg.make_wsgi_app()
         self.httpd = make_server(server_host, server_port, main_coordinator)
 
