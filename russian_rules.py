@@ -1,22 +1,40 @@
-from copy import deepcopy
+from dataclasses import dataclass
+from typing import List
 from urllib.parse import urljoin
 
+import lxml.etree
+import lxml.html
 import requests
-import lxml.etree, lxml.html
+from mashumaro import DataClassDictMixin
+
+
+@dataclass
+class RulesChapter(DataClassDictMixin):
+    title: str
+    path: str
+
+
+@dataclass
+class RulesPart(DataClassDictMixin):
+    title: str
+    chapters: List[RulesChapter]
 
 
 class RussianRules:
     def __init__(self, parts, *, base_url):
-        self._parts = {p["title"].strip(): p for p in parts}
+        self._parts = {
+            p["title"].strip(): RulesPart.from_dict(p)
+            for p in parts
+        }
         self._base_url = base_url
 
     part_titles = property(lambda self: list(self._parts.keys()))
 
     def list_part_chapters(self, part_title):
-        return self._parts[part_title]["chapters"]
+        return self._parts[part_title].chapters
 
     def get_chapter_paragraphs_html(self, chapter):
-        r = requests.get(urljoin(self._base_url, chapter["path"]))
+        r = requests.get(urljoin(self._base_url, chapter.path))
 
         if not r.ok:
             return
@@ -31,7 +49,7 @@ class RussianRules:
             body[:] = [header, paragraph]
             htmls.append(
                 lxml.etree.tostring(  # pylint: disable=c-extension-no-member
-                    deepcopy(page), method="html", encoding="unicode"
+                    page, method="html", encoding="unicode"
                 )
             )
         return htmls

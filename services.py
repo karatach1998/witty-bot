@@ -27,8 +27,9 @@ class MathProblemsService:
         def load_tasks(filepath):
             return [
                 MathTask(
-                    chapter_title=filepath.stem,
-                    book_ref=BookRef(**task.pop("book_ref")),
+                    book_ref=BookRef(
+                        chapter_title=filepath.stem, **task.pop("book_ref")
+                    ),
                     **task,
                 ) for task in yaml.safe_load(filepath.read_text())
             ]
@@ -83,8 +84,7 @@ class MathProblemsService:
         else:
             chapter = next(
                 filter(
-                    lambda ch: ch["title"] == chapter_title,
-                    self._book.chapters
+                    lambda ch: ch.title == chapter_title, self._book.chapters
                 )
             )
             theory_pdf = self._book.get_chapter_pdf(chapter)
@@ -127,7 +127,7 @@ class RussianRulesService:
         if not return_chapter_title:
             return paragraph_html
         else:
-            return random_chapter['title'], paragraph_html
+            return random_chapter.title, paragraph_html
 
 
 class BookCollectionService:
@@ -155,7 +155,7 @@ class BookCollectionService:
 
         random_part = book.parts and random.choice(book.parts)
         random_chapter = random.choice(
-            random_part["chapters"] if random_part else book.chapters
+            random_part.chapters if random_part else book.chapters
         )
 
         chapter_pdf = book.get_chapter_pdf(random_chapter)
@@ -166,7 +166,7 @@ class BookCollectionService:
                 chapter_pdf,
                 (
                     book.title,
-                    random_part and random_part["title"],
-                    random_chapter["title"],
+                    random_part and random_part.title,
+                    random_chapter.title,
                 ),
             )

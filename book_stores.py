@@ -16,41 +16,39 @@ class GDriveBookStore(AbstractBookStore):
         "https://www.googleapis.com/auth/drive.metadata.readonly",
     ]
 
-    def __init__(self, service_account_info_str):
+    def __init__(self):
         creds = service_account.Credentials.from_service_account_info(
-            json.loads(service_account_info_str), scopes=GDriveBookStore.SCOPES
+            json.loads(config.GOOGLE_SERVICE_ACCOUNT_INFO),
+            scopes=GDriveBookStore.SCOPES
         )
         self.drive = build("drive", "v3", credentials=creds)
 
-    def get_book_content(self, book):
+    def get_book_content(self, book_location):
         data = (
             self.drive.files()  # pylint: disable=no-member
-            .get_media(fileId=book.location["file_id"])
-            .execute()
+            .get_media(fileId=book_location.extra["file_id"]).execute()
         )
         return io.BytesIO(data)
 
 
 class YaDiskBookStore(AbstractBookStore):
-    def __init__(self, token):
-        self._y = YaDisk(token=token)
+    def __init__(self):
+        self._y = YaDisk(token=config.YANDEX_DISK_TOKEN)
 
-    def get_book_content(self, book):
+    def get_book_content(self, book_location):
         f = io.BytesIO()
-        self._y.download(book.location["path"], f)
+        self._y.download(book_location.extra["path"], f)
         return f
 
 
 class UrlBookStore(AbstractBookStore):
-    def get_book_content(self, book):
-        r = requests.get(book.location["url"])
+    def get_book_content(self, book_location):
+        r = requests.get(book_location.extra["url"])
         return io.BytesIO(r.content)
 
 
-BOOK_STORE_CONTAINER = BookStoreContainer(
-    {
-        "gdrive": GDriveBookStore(config.GOOGLE_SERVICE_ACCOUNT_INFO),
-        "yadisk": YaDiskBookStore(config.YANDEX_DISK_TOKEN),
-        "url": UrlBookStore(),
-    }
-)
+BOOK_STORE_CONTAINER = BookStoreContainer({
+    "gdrive": GDriveBookStore(),
+    "yadisk": YaDiskBookStore(),
+    "url": UrlBookStore(),
+})

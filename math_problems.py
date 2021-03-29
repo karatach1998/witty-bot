@@ -1,27 +1,25 @@
+from dataclasses import dataclass
 from typing import List, Optional
-from dataclasses import dataclass, InitVar
+
+from mashumaro import DataClassDictMixin
 
 
 @dataclass
-class BookRef:
+class BookRef(DataClassDictMixin):
     start: int
     end: int
     chapter_title: Optional[str] = None
 
 
 @dataclass
-class MathProblem:
+class MathProblem(DataClassDictMixin):
     task: str
     problem: str
     book_ref: BookRef
 
 
 @dataclass
-class MathTask:
+class MathTask(DataClassDictMixin):
     task: str
     problems: List[str]
     book_ref: BookRef
-    chapter_title: InitVar[str]
-
-    def __post_init__(self, chapter_title):
-        self.book_ref.chapter_title = chapter_title
