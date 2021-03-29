@@ -68,7 +68,10 @@ class RussianRulesInlineDialogue(AbstractInlineDialogue):
         html_file_name = f"russian_rules-{chat_id}.html"
         html_file_path = config.MEDIA_PATH / html_file_name
         html_file_path.write_text(html)
-        html_file_url = urljoin(config.APP_URL, f"/media/{html_file_name}")
+        html_file_url = urljoin(
+            config.APP_BASE_URL, f"/media/{html_file_name}"
+        )
+        print(f'URL for {chapter_title}:', html_file_url)
 
         query.message.reply_text(
             f'<a href="{html_file_url}">{chapter_title}</a>',

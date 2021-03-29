@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 
-
 # Resources directory tree:
 # resources/
 #   books/
@@ -16,9 +15,9 @@ from pathlib import Path
 APP_NAME = "witty-bot"
 
 if os.getenv("DYNO"):
-    APP_URL = f"https://{APP_NAME}.herokuapp.com"
+    APP_BASE_URL = f"https://{APP_NAME}.herokuapp.com"
 else:
-    APP_URL = "http://localhost:8080"
+    APP_BASE_URL = "http://localhost:8080"
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 RESOURCES_PATH = Path(PROJECT_DIR, "resources")
