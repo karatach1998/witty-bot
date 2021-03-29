@@ -33,9 +33,9 @@ parts:
     path: consonants/
   - title: Правописание согласных. Двойные согласные
     path: double-consonants/
-  - title: 'Твёрдый знак '
+  - title: Твёрдый знак ъ
     path: hard-sign/
-  - title: 'Мягкий знак '
+  - title: Мягкий знак ь
     path: soft-sign/
   - title: Слитные и дефисные написания. Общие правила
     path: hyphen/

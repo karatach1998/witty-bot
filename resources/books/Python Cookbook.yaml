@@ -1,846 +1,846 @@
----
 title: Python Cookbook
 location:
+  extra:
+    file_id: 1SvkQMYxPXcc8RZJ_aw1ADb1fXIKIawIV
   type: gdrive
-  file_id: "1SvkQMYxPXcc8RZJ_aw1ADb1fXIKIawIV"
 parts:
-- title: Chapter 1. Data Structures and Algorithms
-  start: 18
-  end: 53
-  chapters:
-  - title: 1.1. Unpacking a Sequence into Separate Variables
-    start: 18
-    end: 19
-  - title: 1.2. Unpacking Elements from Iterables of Arbitrary Length
-    start: 20
-    end: 21
-  - title: 1.3. Keeping the Last N Items
-    start: 22
-    end: 23
-  - title: 1.4. Finding the Largest or Smallest N Items
-    start: 24
-    end: 24
-  - title: 1.5. Implementing a Priority Queue
+- chapters:
+  - end: 21
+    start: 19
+    title: 1.1. Unpacking a Sequence into Separate Variables
+  - end: 23
+    start: 21
+    title: 1.2. Unpacking Elements from Iterables of Arbitrary Length
+  - end: 25
+    start: 23
+    title: 1.3. Keeping the Last N Items
+  - end: 26
     start: 25
-    end: 27
-  - title: 1.6. Mapping Keys to Multiple Values in a Dictionary
-    start: 28
-    end: 28
-  - title: 1.7. Keeping Dictionaries in Order
+    title: 1.4. Finding the Largest or Smallest N Items
+  - end: 29
+    start: 26
+    title: 1.5. Implementing a Priority Queue
+  - end: 30
     start: 29
-    end: 29
-  - title: 1.8. Calculating with Dictionaries
+    title: 1.6. Mapping Keys to Multiple Values in a Dictionary
+  - end: 31
     start: 30
-    end: 31
-  - title: 1.9. Finding Commonalities in Two Dictionaries
-    start: 32
-    end: 33
-  - title: 1.10. Removing Duplicates from a Sequence while Maintaining Order
-    start: 34
-    end: 34
-  - title: 1.11. Naming a Slice
+    title: 1.7. Keeping Dictionaries in Order
+  - end: 33
+    start: 31
+    title: 1.8. Calculating with Dictionaries
+  - end: 35
+    start: 33
+    title: 1.9. Finding Commonalities in Two Dictionaries
+  - end: 36
     start: 35
-    end: 36
-  - title: 1.12. Determining the Most Frequently Occurring Items in a Sequence
-    start: 37
-    end: 37
-  - title: 1.13. Sorting a List of Dictionaries by a Common Key
+    title: 1.10. Removing Duplicates from a Sequence while Maintaining Order
+  - end: 38
+    start: 36
+    title: 1.11. Naming a Slice
+  - end: 39
     start: 38
-    end: 39
-  - title: 1.14. Sorting Objects Without Native Comparison Support
-    start: 40
-    end: 40
-  - title: 1.15. Grouping Records Together Based on a Field
+    title: 1.12. Determining the Most Frequently Occurring Items in a Sequence
+  - end: 41
+    start: 39
+    title: 1.13. Sorting a List of Dictionaries by a Common Key
+  - end: 42
     start: 41
-    end: 42
-  - title: 1.16. Filtering Sequence Elements
-    start: 43
-    end: 44
-  - title: 1.17. Extracting a Subset of a Dictionary
-    start: 45
-    end: 45
-  - title: 1.18. Mapping Names to Sequence Elements
+    title: 1.14. Sorting Objects Without Native Comparison Support
+  - end: 44
+    start: 42
+    title: 1.15. Grouping Records Together Based on a Field
+  - end: 46
+    start: 44
+    title: 1.16. Filtering Sequence Elements
+  - end: 47
     start: 46
-    end: 48
-  - title: 1.19. Transforming and Reducing Data at the Same Time
-    start: 49
-    end: 49
-  - title: 1.20. Combining Multiple Mappings into a Single Mapping
+    title: 1.17. Extracting a Subset of a Dictionary
+  - end: 50
+    start: 47
+    title: 1.18. Mapping Names to Sequence Elements
+  - end: 51
     start: 50
-    end: 53
-- title: Chapter 2. Strings and Text
-  start: 54
-  end: 99
-  chapters:
-  - title: 2.1. Splitting Strings on Any of Multiple Delimiters
-    start: 54
-    end: 54
-  - title: 2.2. Matching Text at the Start or End of a String
+    title: 1.19. Transforming and Reducing Data at the Same Time
+  - end: 55
+    start: 51
+    title: 1.20. Combining Multiple Mappings into a Single Mapping
+  end: 55
+  start: 19
+  title: "Chapter\_1.\_Data Structures and Algorithms"
+- chapters:
+  - end: 56
     start: 55
-    end: 56
-  - title: 2.3. Matching Strings Using Shell Wildcard Patterns
-    start: 57
-    end: 58
-  - title: 2.4. Matching and Searching for Text Patterns
-    start: 59
-    end: 61
-  - title: 2.5. Searching and Replacing Text
-    start: 62
-    end: 62
-  - title: 2.6. Searching and Replacing Case-Insensitive Text
+    title: 2.1. Splitting Strings on Any of Multiple Delimiters
+  - end: 58
+    start: 56
+    title: 2.2. Matching Text at the Start or End of a String
+  - end: 60
+    start: 58
+    title: 2.3. Matching Strings Using Shell Wildcard Patterns
+  - end: 63
+    start: 60
+    title: 2.4. Matching and Searching for Text Patterns
+  - end: 64
     start: 63
-    end: 63
-  - title: 2.7. Specifying a Regular Expression for the Shortest Match
+    title: 2.5. Searching and Replacing Text
+  - end: 65
     start: 64
-    end: 64
-  - title: 2.8. Writing a Regular Expression for Multiline Patterns
+    title: 2.6. Searching and Replacing Case-Insensitive Text
+  - end: 66
     start: 65
-    end: 66
-  - title: 2.9. Normalizing Unicode Text to a Standard Representation
-    start: 67
-    end: 68
-  - title: 2.10. Working with Unicode Characters in Regular Expressions
-    start: 69
-    end: 69
-  - title: 2.11. Stripping Unwanted Characters from Strings
+    title: 2.7. Specifying a Regular Expression for the Shortest Match
+  - end: 68
+    start: 66
+    title: 2.8. Writing a Regular Expression for Multiline Patterns
+  - end: 70
+    start: 68
+    title: 2.9. Normalizing Unicode Text to a Standard Representation
+  - end: 71
     start: 70
-    end: 70
-  - title: 2.12. Sanitizing and Cleaning Up Text
+    title: 2.10. Working with Unicode Characters in Regular Expressions
+  - end: 72
     start: 71
-    end: 73
-  - title: 2.13. Aligning Text Strings
-    start: 74
-    end: 74
-  - title: 2.14. Combining and Concatenating Strings
+    title: 2.11. Stripping Unwanted Characters from Strings
+  - end: 75
+    start: 72
+    title: 2.12. Sanitizing and Cleaning Up Text
+  - end: 76
     start: 75
-    end: 77
-  - title: 2.15. Interpolating Variables in Strings
-    start: 78
-    end: 80
-  - title: 2.16. Reformatting Text to a Fixed Number of Columns
-    start: 81
-    end: 81
-  - title: 2.17. Handling HTML and XML Entities in Text
+    title: 2.13. Aligning Text Strings
+  - end: 79
+    start: 76
+    title: 2.14. Combining and Concatenating Strings
+  - end: 82
+    start: 79
+    title: 2.15. Interpolating Variables in Strings
+  - end: 83
     start: 82
-    end: 82
-  - title: 2.18. Tokenizing Text
+    title: 2.16. Reformatting Text to a Fixed Number of Columns
+  - end: 84
     start: 83
-    end: 85
-  - title: 2.19. Writing a Simple Recursive Descent Parser
-    start: 86
-    end: 94
-  - title: 2.20. Performing Text Operations on Byte Strings
-    start: 95
-    end: 99
-- title: Chapter 3. Numbers, Dates, and Times
-  start: 100
-  end: 129
-  chapters:
-  - title: 3.1. Rounding Numerical Values
-    start: 100
-    end: 100
-  - title: 3.2. Performing Accurate Decimal Calculations
+    title: 2.17. Handling HTML and XML Entities in Text
+  - end: 87
+    start: 84
+    title: 2.18. Tokenizing Text
+  - end: 96
+    start: 87
+    title: 2.19. Writing a Simple Recursive Descent Parser
+  - end: 101
+    start: 96
+    title: 2.20. Performing Text Operations on Byte Strings
+  end: 101
+  start: 55
+  title: "Chapter\_2.\_Strings and Text"
+- chapters:
+  - end: 102
     start: 101
-    end: 103
-  - title: 3.3. Formatting Numbers for Output
-    start: 104
-    end: 105
-  - title: 3.4. Working with Binary, Octal, and Hexadecimal Integers
-    start: 106
-    end: 106
-  - title: 3.5. Packing and Unpacking Large Integers from Bytes
+    title: 3.1. Rounding Numerical Values
+  - end: 105
+    start: 102
+    title: 3.2. Performing Accurate Decimal Calculations
+  - end: 107
+    start: 105
+    title: 3.3. Formatting Numbers for Output
+  - end: 108
     start: 107
-    end: 108
-  - title: 3.6. Performing Complex-Valued Math
-    start: 109
-    end: 110
-  - title: 3.7. Working with Infinity and NaNs
-    start: 111
-    end: 112
-  - title: 3.8. Calculating with Fractions
-    start: 113
-    end: 113
-  - title: 3.9. Calculating with Large Numerical Arrays
+    title: 3.4. Working with Binary, Octal, and Hexadecimal Integers
+  - end: 110
+    start: 108
+    title: 3.5. Packing and Unpacking Large Integers from Bytes
+  - end: 112
+    start: 110
+    title: 3.6. Performing Complex-Valued Math
+  - end: 114
+    start: 112
+    title: 3.7. Working with Infinity and NaNs
+  - end: 115
     start: 114
-    end: 116
-  - title: 3.10. Performing Matrix and Linear Algebra Calculations
-    start: 117
-    end: 118
-  - title: 3.11. Picking Things at Random
-    start: 119
-    end: 120
-  - title: 3.12. Converting Days to Seconds, and Other Basic Time Conversions
-    start: 121
-    end: 122
-  - title: 3.13. Determining Last Friday’s Date
-    start: 123
-    end: 123
-  - title: 3.14. Finding the Date Range for the Current Month
+    title: 3.8. Calculating with Fractions
+  - end: 118
+    start: 115
+    title: 3.9. Calculating with Large Numerical Arrays
+  - end: 120
+    start: 118
+    title: 3.10. Performing Matrix and Linear Algebra Calculations
+  - end: 122
+    start: 120
+    title: 3.11. Picking Things at Random
+  - end: 124
+    start: 122
+    title: 3.12. Converting Days to Seconds, and Other Basic Time Conversions
+  - end: 125
     start: 124
-    end: 125
-  - title: 3.15. Converting Strings into Datetimes
-    start: 126
-    end: 126
-  - title: 3.16. Manipulating Dates Involving Time Zones
+    title: "3.13. Determining Last Friday\u2019s Date"
+  - end: 127
+    start: 125
+    title: 3.14. Finding the Date Range for the Current Month
+  - end: 128
     start: 127
-    end: 129
-- title: Chapter 4. Iterators and Generators
-  start: 130
-  end: 157
-  chapters:
-  - title: 4.1. Manually Consuming an Iterator
-    start: 130
-    end: 130
-  - title: 4.2. Delegating Iteration
+    title: 3.15. Converting Strings into Datetimes
+  - end: 131
+    start: 128
+    title: 3.16. Manipulating Dates Involving Time Zones
+  end: 131
+  start: 101
+  title: "Chapter\_3.\_Numbers, Dates, and Times"
+- chapters:
+  - end: 132
     start: 131
-    end: 131
-  - title: 4.3. Creating New Iteration Patterns with Generators
+    title: 4.1. Manually Consuming an Iterator
+  - end: 133
     start: 132
-    end: 133
-  - title: 4.4. Implementing the Iterator Protocol
-    start: 134
-    end: 135
-  - title: 4.5. Iterating in Reverse
-    start: 136
-    end: 136
-  - title: 4.6. Defining Generator Functions with Extra State
+    title: 4.2. Delegating Iteration
+  - end: 135
+    start: 133
+    title: 4.3. Creating New Iteration Patterns with Generators
+  - end: 137
+    start: 135
+    title: 4.4. Implementing the Iterator Protocol
+  - end: 138
     start: 137
-    end: 138
-  - title: 4.7. Taking a Slice of an Iterator
-    start: 139
-    end: 139
-  - title: 4.8. Skipping the First Part of an Iterable
+    title: 4.5. Iterating in Reverse
+  - end: 140
+    start: 138
+    title: 4.6. Defining Generator Functions with Extra State
+  - end: 141
     start: 140
-    end: 141
-  - title: 4.9. Iterating Over All Possible Combinations or Permutations
-    start: 142
-    end: 143
-  - title: 4.10. Iterating Over the Index-Value Pairs of a Sequence
-    start: 144
-    end: 145
-  - title: 4.11. Iterating Over Multiple Sequences Simultaneously
-    start: 146
-    end: 147
-  - title: 4.12. Iterating on Items in Separate Containers
-    start: 148
-    end: 148
-  - title: 4.13. Creating Data Processing Pipelines
+    title: 4.7. Taking a Slice of an Iterator
+  - end: 143
+    start: 141
+    title: 4.8. Skipping the First Part of an Iterable
+  - end: 145
+    start: 143
+    title: 4.9. Iterating Over All Possible Combinations or Permutations
+  - end: 147
+    start: 145
+    title: 4.10. Iterating Over the Index-Value Pairs of a Sequence
+  - end: 149
+    start: 147
+    title: 4.11. Iterating Over Multiple Sequences Simultaneously
+  - end: 150
     start: 149
-    end: 151
-  - title: 4.14. Flattening a Nested Sequence
-    start: 152
-    end: 152
-  - title: 4.15. Iterating in Sorted Order Over Merged Sorted Iterables
+    title: 4.12. Iterating on Items in Separate Containers
+  - end: 153
+    start: 150
+    title: 4.13. Creating Data Processing Pipelines
+  - end: 154
     start: 153
-    end: 154
-  - title: 4.16. Replacing Infinite while Loops with an Iterator
-    start: 155
-    end: 157
-- title: Chapter 5. Files and I/O
-  start: 158
-  end: 191
-  chapters:
-  - title: 5.1. Reading and Writing Text Data
-    start: 158
-    end: 160
-  - title: 5.2. Printing to a File
-    start: 161
-    end: 160
-  - title: 5.3. Printing with a Different Separator or Line Ending
-    start: 161
-    end: 161
-  - title: 5.4. Reading and Writing Binary Data
+    title: 4.14. Flattening a Nested Sequence
+  - end: 156
+    start: 154
+    title: 4.15. Iterating in Sorted Order Over Merged Sorted Iterables
+  - end: 159
+    start: 156
+    title: 4.16. Replacing Infinite while Loops with an Iterator
+  end: 159
+  start: 131
+  title: "Chapter\_4.\_Iterators and Generators"
+- chapters:
+  - end: 162
+    start: 159
+    title: 5.1. Reading and Writing Text Data
+  - end: 162
     start: 162
-    end: 163
-  - title: 5.5. Writing to a File That Doesn’t Already Exist
-    start: 164
-    end: 164
-  - title: 5.6. Performing I/O Operations on a String
+    title: 5.2. Printing to a File
+  - end: 163
+    start: 162
+    title: 5.3. Printing with a Different Separator or Line Ending
+  - end: 165
+    start: 163
+    title: 5.4. Reading and Writing Binary Data
+  - end: 166
     start: 165
-    end: 165
-  - title: 5.7. Reading and Writing Compressed Datafiles
+    title: "5.5. Writing to a File That Doesn\u2019t Already Exist"
+  - end: 167
     start: 166
-    end: 167
-  - title: 5.8. Iterating Over Fixed-Sized Records
-    start: 168
-    end: 168
-  - title: 5.9. Reading Binary Data into a Mutable Buffer
+    title: 5.6. Performing I/O Operations on a String
+  - end: 169
+    start: 167
+    title: 5.7. Reading and Writing Compressed Datafiles
+  - end: 170
     start: 169
-    end: 169
-  - title: 5.10. Memory Mapping Binary Files
+    title: 5.8. Iterating Over Fixed-Sized Records
+  - end: 171
     start: 170
-    end: 172
-  - title: 5.11. Manipulating Pathnames
-    start: 173
-    end: 173
-  - title: 5.12. Testing for the Existence of a File
+    title: 5.9. Reading Binary Data into a Mutable Buffer
+  - end: 174
+    start: 171
+    title: 5.10. Memory Mapping Binary Files
+  - end: 175
     start: 174
-    end: 174
-  - title: 5.13. Getting a Directory Listing
+    title: 5.11. Manipulating Pathnames
+  - end: 176
     start: 175
-    end: 176
-  - title: 5.14. Bypassing Filename Encoding
-    start: 177
-    end: 177
-  - title: 5.15. Printing Bad Filenames
+    title: 5.12. Testing for the Existence of a File
+  - end: 178
+    start: 176
+    title: 5.13. Getting a Directory Listing
+  - end: 179
     start: 178
-    end: 179
-  - title: 5.16. Adding or Changing the Encoding of an Already Open File
-    start: 180
-    end: 181
-  - title: 5.17. Writing Bytes to a Text File
-    start: 182
-    end: 182
-  - title: 5.18. Wrapping an Existing File Descriptor As a File Object
+    title: 5.14. Bypassing Filename Encoding
+  - end: 181
+    start: 179
+    title: 5.15. Printing Bad Filenames
+  - end: 183
+    start: 181
+    title: 5.16. Adding or Changing the Encoding of an Already Open File
+  - end: 184
     start: 183
-    end: 183
-  - title: 5.19. Making Temporary Files and Directories
+    title: 5.17. Writing Bytes to a Text File
+  - end: 185
     start: 184
-    end: 186
-  - title: 5.20. Communicating with Serial Ports
-    start: 187
-    end: 187
-  - title: 5.21. Serializing Python Objects
+    title: 5.18. Wrapping an Existing File Descriptor As a File Object
+  - end: 188
+    start: 185
+    title: 5.19. Making Temporary Files and Directories
+  - end: 189
     start: 188
-    end: 191
-- title: Chapter 6. Data Encoding and Processing
-  start: 192
-  end: 233
-  chapters:
-  - title: 6.1. Reading and Writing CSV Data
-    start: 192
-    end: 195
-  - title: 6.2. Reading and Writing JSON Data
-    start: 196
-    end: 199
-  - title: 6.3. Parsing Simple XML Data
-    start: 200
-    end: 202
-  - title: 6.4. Parsing Huge XML Files Incrementally
-    start: 203
-    end: 205
-  - title: 6.5. Turning a Dictionary into XML
-    start: 206
-    end: 207
-  - title: 6.6. Parsing, Modifying, and Rewriting XML
-    start: 208
-    end: 209
-  - title: 6.7. Parsing XML Documents with Namespaces
-    start: 210
-    end: 211
-  - title: 6.8. Interacting with a Relational Database
-    start: 212
-    end: 213
-  - title: 6.9. Decoding and Encoding Hexadecimal Digits
-    start: 214
-    end: 215
-  - title: 6.10. Decoding and Encoding Base64
-    start: 216
-    end: 215
-  - title: 6.11. Reading and Writing Binary Arrays of Structures
-    start: 216
-    end: 219
-  - title: 6.12. Reading Nested and Variable-Sized Binary Structures
-    start: 220
-    end: 230
-  - title: 6.13. Summarizing Data and Performing Statistics
-    start: 231
-    end: 233
-- title: Chapter 7. Functions
-  start: 234
-  end: 259
-  chapters:
-  - title: 7.1. Writing Functions That Accept Any Number of Arguments
-    start: 234
-    end: 235
-  - title: 7.2. Writing Functions That Only Accept Keyword Arguments
-    start: 236
-    end: 236
-  - title: 7.3. Attaching Informational Metadata to Function Arguments
+    title: 5.20. Communicating with Serial Ports
+  - end: 193
+    start: 189
+    title: 5.21. Serializing Python Objects
+  end: 193
+  start: 159
+  title: "Chapter\_5.\_Files and I/O"
+- chapters:
+  - end: 197
+    start: 193
+    title: 6.1. Reading and Writing CSV Data
+  - end: 201
+    start: 197
+    title: 6.2. Reading and Writing JSON Data
+  - end: 204
+    start: 201
+    title: 6.3. Parsing Simple XML Data
+  - end: 207
+    start: 204
+    title: 6.4. Parsing Huge XML Files Incrementally
+  - end: 209
+    start: 207
+    title: 6.5. Turning a Dictionary into XML
+  - end: 211
+    start: 209
+    title: 6.6. Parsing, Modifying, and Rewriting XML
+  - end: 213
+    start: 211
+    title: 6.7. Parsing XML Documents with Namespaces
+  - end: 215
+    start: 213
+    title: 6.8. Interacting with a Relational Database
+  - end: 217
+    start: 215
+    title: 6.9. Decoding and Encoding Hexadecimal Digits
+  - end: 217
+    start: 217
+    title: 6.10. Decoding and Encoding Base64
+  - end: 221
+    start: 217
+    title: 6.11. Reading and Writing Binary Arrays of Structures
+  - end: 232
+    start: 221
+    title: 6.12. Reading Nested and Variable-Sized Binary Structures
+  - end: 235
+    start: 232
+    title: 6.13. Summarizing Data and Performing Statistics
+  end: 235
+  start: 193
+  title: "Chapter\_6.\_Data Encoding and Processing"
+- chapters:
+  - end: 237
+    start: 235
+    title: 7.1. Writing Functions That Accept Any Number of Arguments
+  - end: 238
     start: 237
-    end: 237
-  - title: 7.4. Returning Multiple Values from a Function
+    title: 7.2. Writing Functions That Only Accept Keyword Arguments
+  - end: 239
     start: 238
-    end: 238
-  - title: 7.5. Defining Functions with Default Arguments
+    title: 7.3. Attaching Informational Metadata to Function Arguments
+  - end: 240
     start: 239
-    end: 240
-  - title: 7.6. Defining Anonymous or Inline Functions
-    start: 241
-    end: 241
-  - title: 7.7. Capturing Variables in Anonymous Functions
+    title: 7.4. Returning Multiple Values from a Function
+  - end: 242
+    start: 240
+    title: 7.5. Defining Functions with Default Arguments
+  - end: 243
     start: 242
-    end: 243
-  - title: 7.8. Making an N-Argument Callable Work As a Callable with Fewer Arguments
-    start: 244
-    end: 247
-  - title: 7.9. Replacing Single Method Classes with Functions
-    start: 248
-    end: 248
-  - title: 7.10. Carrying Extra State with Callback Functions
+    title: 7.6. Defining Anonymous or Inline Functions
+  - end: 245
+    start: 243
+    title: 7.7. Capturing Variables in Anonymous Functions
+  - end: 249
+    start: 245
+    title: 7.8. Making an N-Argument Callable Work As a Callable with Fewer Arguments
+  - end: 250
     start: 249
-    end: 251
-  - title: 7.11. Inlining Callback Functions
-    start: 252
-    end: 254
-  - title: 7.12. Accessing Variables Defined Inside a Closure
-    start: 255
-    end: 259
-- title: Chapter 8. Classes and Objects
-  start: 260
-  end: 345
-  chapters:
-  - title: 8.1. Changing the String Representation of Instances
-    start: 260
-    end: 261
-  - title: 8.2. Customizing String Formatting
-    start: 262
-    end: 262
-  - title: 8.3. Making Objects Support the Context-Management Protocol
+    title: 7.9. Replacing Single Method Classes with Functions
+  - end: 253
+    start: 250
+    title: 7.10. Carrying Extra State with Callback Functions
+  - end: 256
+    start: 253
+    title: 7.11. Inlining Callback Functions
+  - end: 261
+    start: 256
+    title: 7.12. Accessing Variables Defined Inside a Closure
+  end: 261
+  start: 235
+  title: "Chapter\_7.\_Functions"
+- chapters:
+  - end: 263
+    start: 261
+    title: 8.1. Changing the String Representation of Instances
+  - end: 264
     start: 263
-    end: 264
-  - title: 8.4. Saving Memory When Creating a Large Number of Instances
-    start: 265
-    end: 266
-  - title: 8.5. Encapsulating Names in a Class
-    start: 267
-    end: 267
-  - title: 8.6. Creating Managed Attributes
+    title: 8.2. Customizing String Formatting
+  - end: 266
+    start: 264
+    title: 8.3. Making Objects Support the Context-Management Protocol
+  - end: 268
+    start: 266
+    title: 8.4. Saving Memory When Creating a Large Number of Instances
+  - end: 269
     start: 268
-    end: 272
-  - title: 8.7. Calling a Method on a Parent Class
-    start: 273
-    end: 276
-  - title: 8.8. Extending a Property in a Subclass
-    start: 277
-    end: 280
-  - title: 8.9. Creating a New Kind of Class or Instance Attribute
-    start: 281
-    end: 283
-  - title: 8.10. Using Lazily Computed Properties
-    start: 284
-    end: 286
-  - title: 8.11. Simplifying the Initialization of Data Structures
-    start: 287
-    end: 290
-  - title: 8.12. Defining an Interface or Abstract Base Class
-    start: 291
-    end: 293
-  - title: 8.13. Implementing a Data Model or Type System
-    start: 294
-    end: 299
-  - title: 8.14. Implementing Custom Containers
-    start: 300
-    end: 303
-  - title: 8.15. Delegating Attribute Access
-    start: 304
-    end: 307
-  - title: 8.16. Defining More Than One Constructor in a Class
-    start: 308
-    end: 309
-  - title: 8.17. Creating an Instance Without Invoking init
-    start: 310
-    end: 310
-  - title: 8.18. Extending Classes with Mixins
+    title: 8.5. Encapsulating Names in a Class
+  - end: 274
+    start: 269
+    title: 8.6. Creating Managed Attributes
+  - end: 278
+    start: 274
+    title: 8.7. Calling a Method on a Parent Class
+  - end: 282
+    start: 278
+    title: 8.8. Extending a Property in a Subclass
+  - end: 285
+    start: 282
+    title: 8.9. Creating a New Kind of Class or Instance Attribute
+  - end: 288
+    start: 285
+    title: 8.10. Using Lazily Computed Properties
+  - end: 292
+    start: 288
+    title: 8.11. Simplifying the Initialization of Data Structures
+  - end: 295
+    start: 292
+    title: 8.12. Defining an Interface or Abstract Base Class
+  - end: 301
+    start: 295
+    title: 8.13. Implementing a Data Model or Type System
+  - end: 305
+    start: 301
+    title: 8.14. Implementing Custom Containers
+  - end: 309
+    start: 305
+    title: 8.15. Delegating Attribute Access
+  - end: 311
+    start: 309
+    title: 8.16. Defining More Than One Constructor in a Class
+  - end: 312
     start: 311
-    end: 315
-  - title: 8.19. Implementing Stateful Objects or State Machines
-    start: 316
-    end: 321
-  - title: 8.20. Calling a Method on an Object Given the Name As a String
-    start: 322
-    end: 322
-  - title: 8.21. Implementing the Visitor Pattern
+    title: 8.17. Creating an Instance Without Invoking init
+  - end: 317
+    start: 312
+    title: 8.18. Extending Classes with Mixins
+  - end: 323
+    start: 317
+    title: 8.19. Implementing Stateful Objects or State Machines
+  - end: 324
     start: 323
-    end: 327
-  - title: 8.22. Implementing the Visitor Pattern Without Recursion
-    start: 328
-    end: 333
-  - title: 8.23. Managing Memory in Cyclic Data Structures
-    start: 334
-    end: 337
-  - title: 8.24. Making Classes Support Comparison Operations
-    start: 338
-    end: 339
-  - title: 8.25. Creating Cached Instances
-    start: 340
-    end: 345
-- title: Chapter 9. Metaprogramming
-  start: 346
-  end: 413
-  chapters:
-  - title: 9.1. Putting a Wrapper Around a Function
-    start: 346
-    end: 347
-  - title: 9.2. Preserving Function Metadata When Writing Decorators
-    start: 348
-    end: 349
-  - title: 9.3. Unwrapping a Decorator
-    start: 350
-    end: 350
-  - title: 9.4. Defining a Decorator That Takes Arguments
+    title: 8.20. Calling a Method on an Object Given the Name As a String
+  - end: 329
+    start: 324
+    title: 8.21. Implementing the Visitor Pattern
+  - end: 335
+    start: 329
+    title: 8.22. Implementing the Visitor Pattern Without Recursion
+  - end: 339
+    start: 335
+    title: 8.23. Managing Memory in Cyclic Data Structures
+  - end: 341
+    start: 339
+    title: 8.24. Making Classes Support Comparison Operations
+  - end: 347
+    start: 341
+    title: 8.25. Creating Cached Instances
+  end: 347
+  start: 261
+  title: "Chapter\_8.\_Classes and Objects"
+- chapters:
+  - end: 349
+    start: 347
+    title: 9.1. Putting a Wrapper Around a Function
+  - end: 351
+    start: 349
+    title: 9.2. Preserving Function Metadata When Writing Decorators
+  - end: 352
     start: 351
-    end: 352
-  - title: 9.5. Defining a Decorator with User Adjustable Attributes
-    start: 353
-    end: 355
-  - title: 9.6. Defining a Decorator That Takes an Optional Argument
-    start: 356
-    end: 357
-  - title: 9.7. Enforcing Type Checking on a Function Using a Decorator
-    start: 358
-    end: 361
-  - title: 9.8. Defining Decorators As Part of a Class
-    start: 362
-    end: 363
-  - title: 9.9. Defining Decorators As Classes
-    start: 364
-    end: 366
-  - title: 9.10. Applying Decorators to Class and Static Methods
-    start: 367
-    end: 368
-  - title: 9.11. Writing Decorators That Add Arguments to Wrapped Functions
-    start: 369
-    end: 371
-  - title: 9.12. Using Decorators to Patch Class Definitions
-    start: 372
-    end: 372
-  - title: 9.13. Using a Metaclass to Control Instance Creation
+    title: 9.3. Unwrapping a Decorator
+  - end: 354
+    start: 352
+    title: 9.4. Defining a Decorator That Takes Arguments
+  - end: 357
+    start: 354
+    title: 9.5. Defining a Decorator with User Adjustable Attributes
+  - end: 359
+    start: 357
+    title: 9.6. Defining a Decorator That Takes an Optional Argument
+  - end: 363
+    start: 359
+    title: 9.7. Enforcing Type Checking on a Function Using a Decorator
+  - end: 365
+    start: 363
+    title: 9.8. Defining Decorators As Part of a Class
+  - end: 368
+    start: 365
+    title: 9.9. Defining Decorators As Classes
+  - end: 370
+    start: 368
+    title: 9.10. Applying Decorators to Class and Static Methods
+  - end: 373
+    start: 370
+    title: 9.11. Writing Decorators That Add Arguments to Wrapped Functions
+  - end: 374
     start: 373
-    end: 375
-  - title: 9.14. Capturing Class Attribute Definition Order
-    start: 376
-    end: 378
-  - title: 9.15. Defining a Metaclass That Takes Optional Arguments
-    start: 379
-    end: 380
-  - title: 9.16. Enforcing an Argument Signature on *args and **kwargs
-    start: 381
-    end: 383
-  - title: 9.17. Enforcing Coding Conventions in Classes
-    start: 384
-    end: 386
-  - title: 9.18. Defining Classes Programmatically
-    start: 387
-    end: 390
-  - title: 9.19. Initializing Class Members at Definition Time
-    start: 391
-    end: 392
-  - title: 9.20. Implementing Multiple Dispatch with Function Annotations
-    start: 393
-    end: 398
-  - title: 9.21. Avoiding Repetitive Property Methods
-    start: 399
-    end: 400
-  - title: 9.22. Defining Context Managers the Easy Way
-    start: 401
-    end: 402
-  - title: 9.23. Executing Code with Local Side Effects
-    start: 403
-    end: 404
-  - title: 9.24. Parsing and Analyzing Python Source
-    start: 405
-    end: 408
-  - title: 9.25. Disassembling Python Byte Code
-    start: 409
-    end: 413
-- title: Chapter 10. Modules and Packages
-  start: 414
-  end: 453
-  chapters:
-  - title: 10.1. Making a Hierarchical Package of Modules
-    start: 414
-    end: 414
-  - title: 10.2. Controlling the Import of Everything
+    title: 9.12. Using Decorators to Patch Class Definitions
+  - end: 377
+    start: 374
+    title: 9.13. Using a Metaclass to Control Instance Creation
+  - end: 380
+    start: 377
+    title: 9.14. Capturing Class Attribute Definition Order
+  - end: 382
+    start: 380
+    title: 9.15. Defining a Metaclass That Takes Optional Arguments
+  - end: 385
+    start: 382
+    title: 9.16. Enforcing an Argument Signature on *args and **kwargs
+  - end: 388
+    start: 385
+    title: 9.17. Enforcing Coding Conventions in Classes
+  - end: 392
+    start: 388
+    title: 9.18. Defining Classes Programmatically
+  - end: 394
+    start: 392
+    title: 9.19. Initializing Class Members at Definition Time
+  - end: 400
+    start: 394
+    title: 9.20. Implementing Multiple Dispatch with Function Annotations
+  - end: 402
+    start: 400
+    title: 9.21. Avoiding Repetitive Property Methods
+  - end: 404
+    start: 402
+    title: 9.22. Defining Context Managers the Easy Way
+  - end: 406
+    start: 404
+    title: 9.23. Executing Code with Local Side Effects
+  - end: 410
+    start: 406
+    title: 9.24. Parsing and Analyzing Python Source
+  - end: 415
+    start: 410
+    title: 9.25. Disassembling Python Byte Code
+  end: 415
+  start: 347
+  title: "Chapter\_9.\_Metaprogramming"
+- chapters:
+  - end: 416
     start: 415
-    end: 415
-  - title: 10.3. Importing Package Submodules Using Relative Names
+    title: 10.1. Making a Hierarchical Package of Modules
+  - end: 417
     start: 416
-    end: 417
-  - title: 10.4. Splitting a Module into Multiple Files
-    start: 418
-    end: 420
-  - title: 10.5. Making Separate Directories of Code Import Under a Common Namespace
-    start: 421
-    end: 422
-  - title: 10.6. Reloading Modules
-    start: 423
-    end: 423
-  - title: 10.7. Making a Directory or Zip File Runnable As a Main Script
+    title: 10.2. Controlling the Import of Everything
+  - end: 419
+    start: 417
+    title: 10.3. Importing Package Submodules Using Relative Names
+  - end: 422
+    start: 419
+    title: 10.4. Splitting a Module into Multiple Files
+  - end: 424
+    start: 422
+    title: 10.5. Making Separate Directories of Code Import Under a Common Namespace
+  - end: 425
     start: 424
-    end: 424
-  - title: 10.8. Reading Datafiles Within a Package
+    title: 10.6. Reloading Modules
+  - end: 426
     start: 425
-    end: 425
-  - title: 10.9. Adding Directories to sys.path
+    title: 10.7. Making a Directory or Zip File Runnable As a Main Script
+  - end: 427
     start: 426
-    end: 427
-  - title: 10.10. Importing Modules Using a Name Given in a String
-    start: 428
-    end: 428
-  - title: 10.11. Loading Modules from a Remote Machine Using Import Hooks
+    title: 10.8. Reading Datafiles Within a Package
+  - end: 429
+    start: 427
+    title: 10.9. Adding Directories to sys.path
+  - end: 430
     start: 429
-    end: 444
-  - title: 10.12. Patching Modules on Import
-    start: 445
-    end: 447
-  - title: 10.13. Installing Packages Just for Yourself
-    start: 448
-    end: 448
-  - title: 10.14. Creating a New Python Environment
+    title: 10.10. Importing Modules Using a Name Given in a String
+  - end: 446
+    start: 430
+    title: 10.11. Loading Modules from a Remote Machine Using Import Hooks
+  - end: 449
+    start: 446
+    title: 10.12. Patching Modules on Import
+  - end: 450
     start: 449
-    end: 449
-  - title: 10.15. Distributing Packages
+    title: 10.13. Installing Packages Just for Yourself
+  - end: 451
     start: 450
-    end: 453
-- title: Chapter 11. Network and Web Programming
-  start: 454
-  end: 501
-  chapters:
-  - title: 11.1. Interacting with HTTP Services As a Client
-    start: 454
-    end: 457
-  - title: 11.2. Creating a TCP Server
-    start: 458
-    end: 461
-  - title: 11.3. Creating a UDP Server
-    start: 462
-    end: 463
-  - title: 11.4. Generating a Range of IP Addresses from a CIDR Address
-    start: 464
-    end: 465
-  - title: 11.5. Creating a Simple REST-Based Interface
-    start: 466
-    end: 470
-  - title: 11.6. Implementing a Simple Remote Procedure Call with XML-RPC
-    start: 471
-    end: 472
-  - title: 11.7. Communicating Simply Between Interpreters
-    start: 473
-    end: 474
-  - title: 11.8. Implementing Remote Procedure Calls
-    start: 475
-    end: 477
-  - title: 11.9. Authenticating Clients Simply
-    start: 478
-    end: 480
-  - title: 11.10. Adding SSL to Network Services
-    start: 481
-    end: 486
-  - title: 11.11. Passing a Socket File Descriptor Between Processes
-    start: 487
-    end: 491
-  - title: 11.12. Understanding Event-Driven I/O
-    start: 492
-    end: 497
-  - title: 11.13. Sending and Receiving Large Arrays
-    start: 498
-    end: 501
-- title: Chapter 12. Concurrency
-  start: 502
-  end: 555
-  chapters:
-  - title: 12.1. Starting and Stopping Threads
-    start: 502
-    end: 504
-  - title: 12.2. Determining If a Thread Has Started
-    start: 505
-    end: 507
-  - title: 12.3. Communicating Between Threads
-    start: 508
-    end: 513
-  - title: 12.4. Locking Critical Sections
-    start: 514
-    end: 516
-  - title: 12.5. Locking with Deadlock Avoidance
-    start: 517
-    end: 520
-  - title: 12.6. Storing Thread-Specific State
-    start: 521
-    end: 521
-  - title: 12.7. Creating a Thread Pool
+    title: 10.14. Creating a New Python Environment
+  - end: 455
+    start: 451
+    title: 10.15. Distributing Packages
+  end: 455
+  start: 415
+  title: "Chapter\_10.\_Modules and Packages"
+- chapters:
+  - end: 459
+    start: 455
+    title: 11.1. Interacting with HTTP Services As a Client
+  - end: 463
+    start: 459
+    title: 11.2. Creating a TCP Server
+  - end: 465
+    start: 463
+    title: 11.3. Creating a UDP Server
+  - end: 467
+    start: 465
+    title: 11.4. Generating a Range of IP Addresses from a CIDR Address
+  - end: 472
+    start: 467
+    title: 11.5. Creating a Simple REST-Based Interface
+  - end: 474
+    start: 472
+    title: 11.6. Implementing a Simple Remote Procedure Call with XML-RPC
+  - end: 476
+    start: 474
+    title: 11.7. Communicating Simply Between Interpreters
+  - end: 479
+    start: 476
+    title: 11.8. Implementing Remote Procedure Calls
+  - end: 482
+    start: 479
+    title: 11.9. Authenticating Clients Simply
+  - end: 488
+    start: 482
+    title: 11.10. Adding SSL to Network Services
+  - end: 493
+    start: 488
+    title: 11.11. Passing a Socket File Descriptor Between Processes
+  - end: 499
+    start: 493
+    title: 11.12. Understanding Event-Driven I/O
+  - end: 503
+    start: 499
+    title: 11.13. Sending and Receiving Large Arrays
+  end: 503
+  start: 455
+  title: "Chapter\_11.\_Network and Web Programming"
+- chapters:
+  - end: 506
+    start: 503
+    title: 12.1. Starting and Stopping Threads
+  - end: 509
+    start: 506
+    title: 12.2. Determining If a Thread Has Started
+  - end: 515
+    start: 509
+    title: 12.3. Communicating Between Threads
+  - end: 518
+    start: 515
+    title: 12.4. Locking Critical Sections
+  - end: 522
+    start: 518
+    title: 12.5. Locking with Deadlock Avoidance
+  - end: 523
     start: 522
-    end: 525
-  - title: 12.8. Performing Simple Parallel Programming
-    start: 526
-    end: 529
-  - title: 12.9. Dealing with the GIL (and How to Stop Worrying About It)
-    start: 530
-    end: 532
-  - title: 12.10. Defining an Actor Task
-    start: 533
-    end: 536
-  - title: 12.11. Implementing Publish/Subscribe Messaging
-    start: 537
-    end: 540
-  - title: 12.12. Using Generators As an Alternative to Threads
-    start: 541
-    end: 547
-  - title: 12.13. Polling Multiple Thread Queues
-    start: 548
-    end: 550
-  - title: 12.14. Launching a Daemon Process on Unix
-    start: 551
-    end: 555
-- title: Chapter 13. Utility Scripting and System Administration
-  start: 556
-  end: 581
-  chapters:
-  - title: 13.1. Accepting Script Input via Redirection, Pipes, or Input Files
-    start: 556
-    end: 556
-  - title: 13.2. Terminating a Program with an Error Message
+    title: 12.6. Storing Thread-Specific State
+  - end: 527
+    start: 523
+    title: 12.7. Creating a Thread Pool
+  - end: 531
+    start: 527
+    title: 12.8. Performing Simple Parallel Programming
+  - end: 534
+    start: 531
+    title: 12.9. Dealing with the GIL (and How to Stop Worrying About It)
+  - end: 538
+    start: 534
+    title: 12.10. Defining an Actor Task
+  - end: 542
+    start: 538
+    title: 12.11. Implementing Publish/Subscribe Messaging
+  - end: 549
+    start: 542
+    title: 12.12. Using Generators As an Alternative to Threads
+  - end: 552
+    start: 549
+    title: 12.13. Polling Multiple Thread Queues
+  - end: 557
+    start: 552
+    title: 12.14. Launching a Daemon Process on Unix
+  end: 557
+  start: 503
+  title: "Chapter\_12.\_Concurrency"
+- chapters:
+  - end: 558
     start: 557
-    end: 557
-  - title: 13.3. Parsing Command-Line Options
+    title: 13.1. Accepting Script Input via Redirection, Pipes, or Input Files
+  - end: 559
     start: 558
-    end: 560
-  - title: 13.4. Prompting for a Password at Runtime
-    start: 561
-    end: 561
-  - title: 13.5. Getting the Terminal Size
+    title: 13.2. Terminating a Program with an Error Message
+  - end: 562
+    start: 559
+    title: 13.3. Parsing Command-Line Options
+  - end: 563
     start: 562
-    end: 561
-  - title: 13.6. Executing an External Command and Getting Its Output
-    start: 562
-    end: 563
-  - title: 13.7. Copying or Moving Files and Directories
-    start: 564
-    end: 565
-  - title: 13.8. Creating and Unpacking Archives
-    start: 566
-    end: 566
-  - title: 13.9. Finding Files by Name
+    title: 13.4. Prompting for a Password at Runtime
+  - end: 563
+    start: 563
+    title: 13.5. Getting the Terminal Size
+  - end: 565
+    start: 563
+    title: 13.6. Executing an External Command and Getting Its Output
+  - end: 567
+    start: 565
+    title: 13.7. Copying or Moving Files and Directories
+  - end: 568
     start: 567
-    end: 568
-  - title: 13.10. Reading Configuration Files
-    start: 569
-    end: 571
-  - title: 13.11. Adding Logging to Simple Scripts
-    start: 572
-    end: 574
-  - title: 13.12. Adding Logging to Libraries
-    start: 575
-    end: 575
-  - title: 13.13. Making a Stopwatch Timer
+    title: 13.8. Creating and Unpacking Archives
+  - end: 570
+    start: 568
+    title: 13.9. Finding Files by Name
+  - end: 573
+    start: 570
+    title: 13.10. Reading Configuration Files
+  - end: 576
+    start: 573
+    title: 13.11. Adding Logging to Simple Scripts
+  - end: 577
     start: 576
-    end: 577
-  - title: 13.14. Putting Limits on Memory and CPU Usage
-    start: 578
-    end: 579
-  - title: 13.15. Launching a Web Browser
-    start: 580
-    end: 581
-- title: Chapter 14. Testing, Debugging, and Exceptions
-  start: 582
-  end: 613
-  chapters:
-  - title: 14.1. Testing Output Sent to stdout
-    start: 582
-    end: 583
-  - title: 14.2. Patching Objects in Unit Tests
-    start: 584
-    end: 586
-  - title: 14.3. Testing for Exceptional Conditions in Unit Tests
-    start: 587
-    end: 588
-  - title: 14.4. Logging Test Output to a File
-    start: 589
-    end: 589
-  - title: 14.5. Skipping or Anticipating Test Failures
+    title: 13.12. Adding Logging to Libraries
+  - end: 579
+    start: 577
+    title: 13.13. Making a Stopwatch Timer
+  - end: 581
+    start: 579
+    title: 13.14. Putting Limits on Memory and CPU Usage
+  - end: 583
+    start: 581
+    title: 13.15. Launching a Web Browser
+  end: 583
+  start: 557
+  title: "Chapter\_13.\_Utility Scripting and System Administration"
+- chapters:
+  - end: 585
+    start: 583
+    title: 14.1. Testing Output Sent to stdout
+  - end: 588
+    start: 585
+    title: 14.2. Patching Objects in Unit Tests
+  - end: 590
+    start: 588
+    title: 14.3. Testing for Exceptional Conditions in Unit Tests
+  - end: 591
     start: 590
-    end: 590
-  - title: 14.6. Handling Multiple Exceptions
+    title: 14.4. Logging Test Output to a File
+  - end: 592
     start: 591
-    end: 592
-  - title: 14.7. Catching All Exceptions
-    start: 593
-    end: 594
-  - title: 14.8. Creating Custom Exceptions
-    start: 595
-    end: 596
-  - title: 14.9. Raising an Exception in Response to Another Exception
-    start: 597
-    end: 598
-  - title: 14.10. Reraising the Last Exception
-    start: 599
-    end: 599
-  - title: 14.11. Issuing Warning Messages
+    title: 14.5. Skipping or Anticipating Test Failures
+  - end: 594
+    start: 592
+    title: 14.6. Handling Multiple Exceptions
+  - end: 596
+    start: 594
+    title: 14.7. Catching All Exceptions
+  - end: 598
+    start: 596
+    title: 14.8. Creating Custom Exceptions
+  - end: 600
+    start: 598
+    title: 14.9. Raising an Exception in Response to Another Exception
+  - end: 601
     start: 600
-    end: 601
-  - title: 14.12. Debugging Basic Program Crashes
-    start: 602
-    end: 603
-  - title: 14.13. Profiling and Timing Your Program
-    start: 604
-    end: 606
-  - title: 14.14. Making Your Programs Run Faster
-    start: 607
-    end: 613
-- title: Chapter 15. C Extensions
-  start: 614
-  end: 681
-  chapters:
-  - title: 15.1. Accessing C Code Using ctypes
-    start: 616
-    end: 621
-  - title: 15.2. Writing a Simple C Extension Module
-    start: 622
-    end: 625
-  - title: 15.3. Writing an Extension Function That Operates on Arrays
-    start: 626
-    end: 628
-  - title: 15.4. Managing Opaque Pointers in C Extension Modules
-    start: 629
-    end: 630
-  - title: 15.5. Defining and Exporting C APIs from Extension Modules
-    start: 631
-    end: 635
-  - title: 15.6. Calling Python from C
-    start: 636
-    end: 641
-  - title: 15.7. Releasing the GIL in C Extensions
-    start: 642
-    end: 641
-  - title: 15.8. Mixing Threads from C and Python
-    start: 642
-    end: 643
-  - title: 15.9. Wrapping C Code with Swig
-    start: 644
-    end: 648
-  - title: 15.10. Wrapping Existing C Code with Cython
-    start: 649
-    end: 654
-  - title: 15.11. Using Cython to Write High-Performance Array Operations
-    start: 655
-    end: 659
-  - title: 15.12. Turning a Function Pointer into a Callable
-    start: 660
-    end: 660
-  - title: 15.13. Passing NULL-Terminated Strings to C Libraries
+    title: 14.10. Reraising the Last Exception
+  - end: 603
+    start: 601
+    title: 14.11. Issuing Warning Messages
+  - end: 605
+    start: 603
+    title: 14.12. Debugging Basic Program Crashes
+  - end: 608
+    start: 605
+    title: 14.13. Profiling and Timing Your Program
+  - end: 615
+    start: 608
+    title: 14.14. Making Your Programs Run Faster
+  end: 615
+  start: 583
+  title: "Chapter\_14.\_Testing, Debugging, and Exceptions"
+- chapters:
+  - end: 623
+    start: 615
+    title: 15.1. Accessing C Code Using ctypes
+  - end: 627
+    start: 623
+    title: 15.2. Writing a Simple C Extension Module
+  - end: 630
+    start: 627
+    title: 15.3. Writing an Extension Function That Operates on Arrays
+  - end: 632
+    start: 630
+    title: 15.4. Managing Opaque Pointers in C Extension Modules
+  - end: 637
+    start: 632
+    title: 15.5. Defining and Exporting C APIs from Extension Modules
+  - end: 643
+    start: 637
+    title: 15.6. Calling Python from C
+  - end: 643
+    start: 643
+    title: 15.7. Releasing the GIL in C Extensions
+  - end: 645
+    start: 643
+    title: 15.8. Mixing Threads from C and Python
+  - end: 650
+    start: 645
+    title: 15.9. Wrapping C Code with Swig
+  - end: 656
+    start: 650
+    title: 15.10. Wrapping Existing C Code with Cython
+  - end: 661
+    start: 656
+    title: 15.11. Using Cython to Write High-Performance Array Operations
+  - end: 662
     start: 661
-    end: 664
-  - title: 15.14. Passing Unicode Strings to C Libraries
-    start: 665
-    end: 669
-  - title: 15.15. Converting C Strings to Python
-    start: 670
-    end: 670
-  - title: 15.16. Working with C Strings of Dubious Encoding
+    title: 15.12. Turning a Function Pointer into a Callable
+  - end: 666
+    start: 662
+    title: 15.13. Passing NULL-Terminated Strings to C Libraries
+  - end: 671
+    start: 666
+    title: 15.14. Passing Unicode Strings to C Libraries
+  - end: 672
     start: 671
-    end: 673
-  - title: 15.17. Passing Filenames to C Extensions
-    start: 674
-    end: 674
-  - title: 15.18. Passing Open Files to C Extensions
+    title: 15.15. Converting C Strings to Python
+  - end: 675
+    start: 672
+    title: 15.16. Working with C Strings of Dubious Encoding
+  - end: 676
     start: 675
-    end: 675
-  - title: 15.19. Reading File-Like Objects from C
+    title: 15.17. Passing Filenames to C Extensions
+  - end: 677
     start: 676
-    end: 678
-  - title: 15.20. Consuming an Iterable from C
-    start: 679
-    end: 679
-  - title: 15.21. Diagnosing Segmentation Faults
+    title: 15.18. Passing Open Files to C Extensions
+  - end: 680
+    start: 677
+    title: 15.19. Reading File-Like Objects from C
+  - end: 681
     start: 680
-    end: 681
+    title: 15.20. Consuming an Iterable from C
+  - end: 683
+    start: 681
+    title: 15.21. Diagnosing Segmentation Faults
+  end: 683
+  start: 615
+  title: "Chapter\_15.\_C Extensions"
