@@ -73,6 +73,7 @@ def run_update_poller_mode():
 
 with Configurator() as cfg:
     cfg.add_static_view(name="static", path="static")
+    cfg.add_static_view(name="", path="static")
     cfg.add_static_view(name="media", path=str(config.MEDIA_PATH))
     cfg.add_route('bot_webhook', f'/{config.TELEGRAM_BOT_TOKEN}')
     app = cfg.make_wsgi_app()
