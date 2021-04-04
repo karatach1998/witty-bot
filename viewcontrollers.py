@@ -69,7 +69,7 @@ class RussianRulesInlineDialogue(AbstractInlineDialogue):
         chat_id = update.effective_message.chat_id
         html_file_name = f"russian_rules-{chat_id}.html"
         html_file_url = urljoin(
-            config.APP_BASE_URL, f"/media/{html_file_name}"
+            config.APP_BASE_URL, f"{config.MEDIA_URL}/{html_file_name}"
         )
         requests.post(html_file_url, files={'file': io.StringIO(html)})
         print(f'URL for {chapter_title}:', html_file_url)
