@@ -9,9 +9,9 @@ from pathlib import Path
 import yaml
 from PyPDF2 import PdfFileReader
 
-import config
-from book_stores import BOOK_STORE_CONTAINER
-from books import BookLocation
+from bot import config
+from bot.book_stores import BOOK_STORE_CONTAINER
+from bot.books import BookLocation
 
 
 def build_location(file_url):

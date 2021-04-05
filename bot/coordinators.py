@@ -3,8 +3,12 @@ from itertools import chain
 
 from telegram.ext import CommandHandler, ConversationHandler  # CallbackContext,
 
-from services import BookCollectionService, IntegralProblemsService, RussianRulesService
-from viewcontrollers import MainViewController, MathProblemsViewController
+from .services import (
+    BookCollectionService,
+    IntegralProblemsService,
+    RussianRulesService,
+)
+from .viewcontrollers import MainViewController, MathProblemsViewController
 
 
 class AbstractCoordinator:

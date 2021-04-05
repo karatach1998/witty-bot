@@ -1,4 +1,4 @@
-from coordinators import MainCoordinator
+from .coordinators import MainCoordinator
 
 
 def populate_dispatcher(dispatcher):

@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 
 import lxml.html
 
-from russian_rules import RussianRules  # pylint: disable=import-error
+from bot.russian_rules import RussianRules  # pylint: disable=import-error
 
 RULE_CHAPTER_HTML_PAGE = """
 <html>

@@ -6,8 +6,8 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from yadisk import YaDisk
 
-import config
-from books import AbstractBookStore, BookStoreContainer
+from . import config
+from .books import AbstractBookStore, BookStoreContainer
 
 
 class GDriveBookStore(AbstractBookStore):

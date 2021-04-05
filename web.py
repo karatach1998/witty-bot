@@ -1,7 +1,6 @@
 from flask import Flask, Response, request, send_from_directory
 
-import config
-from bot import enable_webhook_mode
+from bot import config, enable_webhook_mode
 from tasks import handle_webhook
 
 app = Flask(__name__)

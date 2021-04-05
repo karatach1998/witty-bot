@@ -15,7 +15,7 @@ from telegram.ext import (  # CallbackContext,
     MessageHandler,
 )
 
-import config
+from . import config
 
 HOME_STR = "\U0001F3E0"
 

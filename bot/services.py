@@ -6,12 +6,12 @@ import yaml
 from sympy.parsing.latex import parse_latex
 from sympy.printing.maple import maple_code
 
-import config
-from book_stores import BOOK_STORE_CONTAINER
-from books import Book
-from math_problems import BookRef, MathProblem, MathTask
-from russian_rules import RussianRules
-from utils import latex2png
+from . import config
+from .book_stores import BOOK_STORE_CONTAINER
+from .books import Book
+from .math_problems import BookRef, MathProblem, MathTask
+from .russian_rules import RussianRules
+from .utils import latex2png
 
 
 class MathProblemsService:

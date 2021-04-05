@@ -5,7 +5,7 @@ from unittest.mock import Mock
 
 from test_utils import assert_pdf_equal
 
-from books import (  # pylint: disable=import-error
+from bot.books import (  # pylint: disable=import-error
     AbstractBookStore,
     Book,
     BookLocation,

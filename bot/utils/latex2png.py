@@ -47,7 +47,7 @@ def min_dist_inside(point, rotation, box):
     """Gets the space in a given direction from "point" to the boundaries
     of "box" (where box is an object with x0, y0, x1, & y1 attributes,
     point is a tuple of x,y, and rotation is the angle in degrees)"""
-    from math import sin, cos, radians
+    from math import cos, radians, sin
 
     x0, y0 = point
     rotation = radians(rotation)
@@ -81,7 +81,8 @@ def pixels_per_char(textobj):
 
 def safewrap(text, width):
     """Wraps text, but avoids putting linebreaks in tex strings"""
-    import textwrap, re
+    import re
+    import textwrap
 
     # If it's not a tex string, just wrap it as usual...
     if "$" not in text:
@@ -93,7 +94,9 @@ def safewrap(text, width):
 
     # Temporarily replace spaces and dashes inside tex segments so that
     # they will be treated as long words by textwrap...
-    segments[1::2] = [re.sub(r"[^\d\w]", "", re.sub(r"\\\w+", "I", x)) for x in tex]
+    segments[1::2] = [
+        re.sub(r"[^\d\w]", "", re.sub(r"\\\w+", "I", x)) for x in tex
+    ]
     # Rejoin the temp tex strings with the rest of the text and wrap it
     temp_text = "$".join(segments)
     wrapped = textwrap.fill(

@@ -18,7 +18,7 @@ APP_BASE_URL = os.getenv('APP_URL', "http://localhost:8080")
 MEDIA_URL = '/media'
 MEDIA_PATH = Path("/tmp")
 
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESOURCES_PATH = Path(PROJECT_DIR, "resources")
 MATH_PROBLEMS_PATH = RESOURCES_PATH / "math"
 BOOKS_PATH = RESOURCES_PATH / "books"
