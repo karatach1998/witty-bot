@@ -1,0 +1,26 @@
+repos:
+  - repo: https://github.com/pycqa/isort
+    rev: 5.6.3
+    hooks:
+      - id: isort
+        name: isort (python)
+        args: ["--profile=black"]
+  - repo: https://github.com/google/yapf
+    rev: v0.31.0
+    hooks:
+      - id: yapf
+        entry: bash -c 'yapf "$@"' --
+        args: ["-i", "--style={
+            based_on_style=pep8,
+            coalesce_brackets=true,
+            dedent_closing_brackets=true,
+            space_between_ending_comma_and_closing_bracket=false
+            }"]
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: poetry run python -m pylint
+        language: system
+        types: [python]
+        args: ["--disable=R,C", "--output-format=colorized"]

@@ -1,0 +1,7 @@
+---
+- task: Найти интегралы
+  book_ref:
+    start: 57
+    end: 64
+  problems:
+    -
