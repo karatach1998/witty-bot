@@ -21,7 +21,7 @@ steps:
       repo: registry.heroku.com/witty-bot/web
       dockerfile: Dockerfile.web
       build_args:
-        REGISTRY_URL: registry.heroku.com
+        - REGISTRY_URL=registry.heroku.com
       registry: registry.heroku.com
       username:
         from_secret: heroku_email
@@ -30,6 +30,7 @@ steps:
       tags:
         - ${DRONE_COMMIT_BRANCH}
         - latest
+    depends_on: [build]
 
   - name: deploy worker
     image: plugins/docker
@@ -37,7 +38,7 @@ steps:
       repo: registry.heroku.com/witty-bot/worker
       dockerfile: Dockerfile.worker
       build_args:
-        REGISTRY_URL: registry.heroku.com
+        - REGISTRY_URL=registry.heroku.com
       registry: registry.heroku.com
       username:
         from_secret: heroku_email
@@ -46,6 +47,7 @@ steps:
       tags:
         - ${DRONE_COMMIT_BRANCH}
         - latest
+    depends_on: [build]
 
 trigger:
   branch: [master, ci]
