@@ -6,7 +6,7 @@ steps:
   - name: build
     image: plugins/docker
     settings:
-      repo: witty-bot/base
+      repo: registry.heroku.com/witty-bot/base
       registry: registry.heroku.com
       username:
         from_secret: heroku_email
@@ -18,7 +18,7 @@ steps:
   - name: deploy web
     image: plugins/docker
     settings:
-      repo: witty-bot/web
+      repo: registry.heroku.com/witty-bot/web
       dockerfile: Dockerfile.web
       registry: registry.heroku.com
       username:
@@ -32,7 +32,7 @@ steps:
   - name: deploy worker
     image: plugins/docker
     settings:
-      repo: witty-bot/worker
+      repo: registry.heroku.com/witty-bot/worker
       dockerfile: Dockerfile.worker
       registry: registry.heroku.com
       username:
