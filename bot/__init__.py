@@ -1,7 +1,6 @@
 import requests
 
 from . import config
-from .handlers import populate_dispatcher
 
 
 def disable_webhook_mode():

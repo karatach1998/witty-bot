@@ -1,6 +1,7 @@
 from telegram.ext import Updater
 
-from . import config, disable_webhook_mode, populate_dispatcher
+from . import config, disable_webhook_mode
+from .handlers import populate_dispatcher
 
 
 def main():
