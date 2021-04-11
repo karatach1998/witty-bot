@@ -1,4 +1,5 @@
-FROM witty-bot/base
+ARG REGISTRY_URL
+FROM ${REGISTRY_URL}/witty-bot/base
 
 WORKDIR /app
 RUN pip install --no-cache-dir gunicorn
