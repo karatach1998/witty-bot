@@ -1,0 +1,6 @@
+FROM witty-bot/base
+
+WORKDIR /app
+RUN pip install --no-cache-dir celery
+
+CMD ["celery", "-A tasks.celery", "worker", "-c 4"]

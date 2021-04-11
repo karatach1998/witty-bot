@@ -1,0 +1,48 @@
+kind: pipeline
+name: default
+type: docker
+
+steps:
+  - name: build
+    image: plugins/docker
+    settings:
+      repo: witty-bot/base
+      registry: registry.heroku.com
+      username:
+        from_secret: heroku_email
+      password:
+        from_secret: heroku_api_key
+      tags:
+        - latest
+
+  - name: deploy web
+    image: plugins/docker
+    settings:
+      repo: witty-bot/web
+      dockerfile: Dockerfile.web
+      registry: registry.heroku.com
+      username:
+        from_secret: heroku_email
+      password:
+        from_secret: heroku_api_key
+      tags:
+        - ${DRONE_COMMIT_BRANCH}
+        - latest
+
+  - name: deploy worker
+    image: plugins/docker
+    settings:
+      repo: witty-bot/worker
+      dockerfile: Dockerfile.worker
+      registry: registry.heroku.com
+      username:
+        from_secret: heroku_email
+      password:
+        from_secret: heroku_api_key
+      tags:
+        - ${DRONE_COMMIT_BRANCH}
+        - latest
+
+trigger:
+  branch: [master, ci]
+  event: push
