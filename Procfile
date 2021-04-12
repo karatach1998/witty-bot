@@ -1,2 +1,2 @@
 web: gunicorn web:app
-worker: celery -A tasks.celery worker -c 4
+worker: celery -A tasks.celery worker -c 2
