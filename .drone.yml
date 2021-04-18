@@ -61,6 +61,16 @@ steps:
       - deploy web
       - deploy worker
 
+  - name: send telegram notification
+    image: appleboy/drone-telegram
+    settings:
+      token:
+        from_secret: telegram_token
+      to:
+        from_secret: telegram_user_id
+    when:
+      status; [changed, failure]
+
 trigger:
   branch: [main, ci]
   event: push
