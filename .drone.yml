@@ -50,5 +50,5 @@ steps:
     depends_on: [build]
 
 trigger:
-  branch: [master, ci]
+  branch: [main, ci]
   event: push
