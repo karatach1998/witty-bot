@@ -69,7 +69,7 @@ steps:
       to:
         from_secret: telegram_user_id
     when:
-      status; [changed, failure]
+      status: [changed, failure]
 
 trigger:
   branch: [main, ci]
