@@ -51,20 +51,12 @@ steps:
 
   - name: release
     image: alpine/httpie
-    volumes:
-      - name: dockersock
-        path: /var/run/docker.sock
     commands:
       - apk add docker
       - ./heroku-release.sh witty-bot web worker
     environment:
       HEROKU_AUTH_TOKEN:
         from_secret: heroku_auth_token
-
-volumes:
-  - name: dockersock
-    host:
-      path: /var/run/docker.sock
 
 trigger:
   branch: [main, ci]
