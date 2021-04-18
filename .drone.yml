@@ -57,6 +57,9 @@ steps:
     environment:
       HEROKU_AUTH_TOKEN:
         from_secret: heroku_auth_token
+    depends_on:
+      - deploy web
+      - deploy worker
 
 trigger:
   branch: [main, ci]
