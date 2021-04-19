@@ -53,6 +53,7 @@ steps:
     image: alpine/httpie
     commands:
       - apk add docker
+      - chmod +x ./heroku-release.sh
       - ./heroku-release.sh witty-bot web worker
     environment:
       HEROKU_AUTH_TOKEN:
