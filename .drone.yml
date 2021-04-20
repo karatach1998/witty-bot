@@ -55,7 +55,7 @@ steps:
       - name: dockersock
         path: /var/run/docker.sock
     commands:
-      - apk add docker-cli
+      - apk add --update --no-cache docker-cli
       - chmod +x ./heroku-release.sh
       - ./heroku-release.sh witty-bot web worker
     environment:
