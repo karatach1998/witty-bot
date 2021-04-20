@@ -51,8 +51,11 @@ steps:
 
   - name: release
     image: alpine/httpie
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
     commands:
-      - apk add docker
+      - apk add docker-cli
       - chmod +x ./heroku-release.sh
       - ./heroku-release.sh witty-bot web worker
     environment:
@@ -69,8 +72,14 @@ steps:
         from_secret: telegram_token
       to:
         from_secret: telegram_user_id
+    depends_on: [release]
     when:
-      status: [changed, failure]
+      status: [success, failure]
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
 
 trigger:
   branch: [main, ci]

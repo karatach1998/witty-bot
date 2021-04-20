@@ -12,8 +12,9 @@ updates=${updates:2}
 
 echo "Releasing images ${dyno_types// /,} for $app_name"
 
-http --ignore-stdin -v \
+http --ignore-stdin --check-status -v\
      PATCH https://api.heroku.com/apps/$app_name/formation \
      "Accept: application/vnd.heroku+json; version=3.docker-releases" \
      "Authorization: Bearer $HEROKU_AUTH_TOKEN" \
      updates:="[$updates]"
+exit $?
