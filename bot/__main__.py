@@ -4,9 +4,9 @@ from . import config, disable_webhook_mode
 from .handlers import populate_dispatcher
 
 
-def main():
+def main() -> None:
     updater = Updater(config.TELEGRAM_BOT_TOKEN)
-    dispatcher = updater.dispatcher
+    dispatcher = updater.dispatcher  # type: ignore
 
     populate_dispatcher(dispatcher)
 

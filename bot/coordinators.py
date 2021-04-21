@@ -1,32 +1,44 @@
+from __future__ import annotations
+
 from datetime import timedelta
 from itertools import chain
+from typing import Iterable, List, TypeVar
 
-from telegram.ext import CommandHandler, ConversationHandler  # CallbackContext,
+from telegram import Update
+from telegram.ext import CallbackContext, CommandHandler, ConversationHandler, Handler
 
 from .services import (
     BookCollectionService,
     IntegralProblemsService,
     RussianRulesService,
 )
-from .viewcontrollers import MainViewController, MathProblemsViewController
+from .viewcontrollers import (
+    AbstractViewController,
+    MainViewController,
+    MathProblemsViewController,
+)
+
+BaseHandler = TypeVar('BaseHandler', bound=Handler[Update])
 
 
 class AbstractCoordinator:
-    viewcontroller = None
+    viewcontroller: AbstractViewController
 
-    def iter_children(self):
+    def iter_children(self) -> Iterable[AbstractCoordinator]:
         raise NotImplementedError
 
-    def handlers(self):
+    def handlers(self) -> List[BaseHandler]:
         return self.viewcontroller.handlers()
 
-    def start(self, update, context):
+    def start(
+        self, update: Update, context: CallbackContext
+    ) -> AbstractCoordinator:
         self.viewcontroller.start_command(update, context)
         return self
 
 
 class MainCoordinator(AbstractCoordinator):
-    def __init__(self):
+    def __init__(self) -> None:
         russian_rules_service = RussianRulesService()
         book_collection_service = BookCollectionService()
         self.viewcontroller = MainViewController(
@@ -35,33 +47,42 @@ class MainCoordinator(AbstractCoordinator):
 
         self._integral_coordinator = IntegralCoordinator(self)
 
-    def iter_children(self):
+    def iter_children(self) -> Iterable[AbstractCoordinator]:
         return chain((self,), self._integral_coordinator.iter_children())
 
     @property
-    def conv_handler(self):
+    def conv_handler(self) -> ConversationHandler:
         return ConversationHandler(
             entry_points=[CommandHandler("start", self.start)],
             states={coord: coord.handlers()
                     for coord in self.iter_children()},
             fallbacks=[],
-            conversation_timeout=timedelta(minutes=15),
+            conversation_timeout=timedelta(minutes=15),  # type: ignore
         )
 
-    def integral_handler(self, update, context):
+    def integral_handler(
+        self, update: Update, context: CallbackContext
+    ) -> AbstractCoordinator:
         return self._integral_coordinator.start(update, context)
 
 
-class IntegralCoordinator(AbstractCoordinator):
-    def __init__(self, parent):
+class ChildCoordinator(AbstractCoordinator):
+    def __init__(self, parent: AbstractCoordinator) -> None:
         self.parent = parent
+
+    def iter_children(self) -> Iterable[AbstractCoordinator]:
+        return (self,)
+
+    def end_handler(
+        self, update: Update, context: CallbackContext
+    ) -> AbstractCoordinator:
+        return self.parent.start(update, context)
+
+
+class IntegralCoordinator(ChildCoordinator):
+    def __init__(self, parent: AbstractCoordinator) -> None:
+        super().__init__(parent)
         integral_problems_service = IntegralProblemsService()
         self.viewcontroller = MathProblemsViewController(
             self, integral_problems_service
         )
-
-    def iter_children(self):
-        return (self,)
-
-    def end_handler(self, update, context):
-        return self.parent.start(update, context)

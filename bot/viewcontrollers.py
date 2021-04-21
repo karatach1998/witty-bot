@@ -1,41 +1,61 @@
+from __future__ import annotations
+
 import io
 from itertools import chain
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, TypeVar, Union, cast
 from urllib.parse import urljoin
 
 import requests
 import yaml
-from telegram import (  # Update,
+from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
+    KeyboardButton,
     ReplyKeyboardMarkup,
+    Update,
 )
-from telegram.ext import (  # CallbackContext,
+from telegram.ext import (
+    CallbackContext,
     CallbackQueryHandler,
     Filters,
+    Handler,
     MessageHandler,
 )
 
 from . import config
+from .math_problems import MathProblem
+
+if TYPE_CHECKING:
+    from .coordinators import AbstractCoordinator, ChildCoordinator, MainCoordinator
+    from .services import (
+        BookCollectionService,
+        MathProblemsService,
+        RussianRulesService,
+    )
+    ConversationState = AbstractCoordinator
+    BaseHandler = TypeVar('BaseHandler', bound=Handler[Update])
 
 HOME_STR = "\U0001F3E0"
 
 
 class AbstractInlineDialogue:
-    def handlers(self):
+    def handlers(self) -> List[CallbackQueryHandler]:
         raise NotImplementedError
 
-    def start_dialogue_command(self, update, context):
+    def start_dialogue_command(
+        self, update: Update, context: CallbackContext
+    ) -> Optional[ConversationState]:
         raise NotImplementedError
 
 
 class RussianRulesInlineDialogue(AbstractInlineDialogue):
-    def __init__(self, russian_rules_service):
+    def __init__(self, russian_rules_service: RussianRulesService) -> None:
         self._russian_rules = russian_rules_service
         self._russian_rules_part_titles = dict(
             enumerate(self._russian_rules.part_titles)
         )
 
-    def handlers(self):
+    def handlers(self) -> List[CallbackQueryHandler]:
         return [
             CallbackQueryHandler(
                 self.paragraph_callback,
@@ -43,7 +63,9 @@ class RussianRulesInlineDialogue(AbstractInlineDialogue):
             )
         ]
 
-    def start_dialogue_command(self, update, context):
+    def start_dialogue_command(
+        self, update: Update, context: CallbackContext
+    ) -> Optional[ConversationState]:
         inline_keyboard = [[
             InlineKeyboardButton(
                 title, callback_data=f"russian_rules.part_id: {id}"
@@ -54,19 +76,20 @@ class RussianRulesInlineDialogue(AbstractInlineDialogue):
             reply_markup=InlineKeyboardMarkup(inline_keyboard),
         )
 
-    def paragraph_callback(self, update, context):  # pylint: disable=unused-argument
+    def paragraph_callback(self, update: Update, _: CallbackContext) -> None:
         query = update.callback_query
         query.answer("Загрузка...")
 
         part_id = yaml.safe_load(query.data).get("russian_rules.part_id")
         part_title = self._russian_rules_part_titles[part_id]
-        chapter_title, html = (
+        html, chapter_title = cast(
+            Tuple[Optional[str], str],
             self._russian_rules.get_random_paragraph_html(
                 part_title, return_chapter_title=True
             )
         )
 
-        chat_id = update.effective_message.chat_id
+        chat_id = update.effective_message.chat_id  # type: ignore
         html_file_name = f"russian_rules-{chat_id}.html"
         html_file_url = urljoin(
             config.APP_BASE_URL, f"{config.MEDIA_URL}/{html_file_name}"
@@ -81,20 +104,22 @@ class RussianRulesInlineDialogue(AbstractInlineDialogue):
 
 
 class BookCollectionInlineDialogue(AbstractInlineDialogue):
-    def __init__(self, book_collection_service):
+    def __init__(self, book_collection_service: BookCollectionService) -> None:
         self._book_collection = book_collection_service
         self._book_titles_mapping = dict(
             enumerate(book_collection_service.book_titles)
         )
 
-    def handlers(self):
+    def handlers(self) -> List[CallbackQueryHandler]:
         return [
             CallbackQueryHandler(
                 self.get_book_callback, pattern=r"^book_id: \d+$"
             )
         ]
 
-    def start_dialogue_command(self, update, context):
+    def start_dialogue_command(
+        self, update: Update, context: CallbackContext
+    ) -> Optional[ConversationState]:
         inline_keyboard = [[
             InlineKeyboardButton(title, callback_data=f"book_id: {id}")
         ] for id, title in self._book_titles_mapping.items()]
@@ -103,42 +128,49 @@ class BookCollectionInlineDialogue(AbstractInlineDialogue):
             reply_markup=InlineKeyboardMarkup(inline_keyboard)
         )
 
-    def get_book_callback(self, update, context):  # pylint: disable=unused-argument
+    def get_book_callback(self, update: Update, _: CallbackContext) -> None:
         query = update.callback_query
         query.answer("Загрузка...")
 
         book_id = yaml.safe_load(query.data).get("book_id")
         book_title = self._book_titles_mapping[book_id]
-        chapter_pdf, title_tuple = (
+        chapter_pdf, title_tuple = cast(
+            Tuple[bytes, Tuple[str, Optional[str], str]],
             self._book_collection.get_random_book_chapter_pdf(
                 book_title, return_title_tuple=True
             )
         )
-        _, _, chapter_title = title_tuple
+
+        _, _, chapter_title = title_tuple  # type: ignore
 
         query.message.reply_document(
             chapter_pdf,
             filename=f"{chapter_title}.pdf",
-            caption=" / ".join(filter(bool, title_tuple)),
+            caption=" / ".join(filter(bool, title_tuple)),  # type: ignore
             timeout=(5 * 60),
         )
 
 
 class AbstractViewController:
-    def handlers(self):
+    def handlers(self) -> List[BaseHandler]:
         raise NotImplementedError
 
-    def keyboard(self, context):
+    def keyboard(
+        self, context: CallbackContext
+    ) -> List[List[Union[str, KeyboardButton]]]:
         raise NotImplementedError
 
-    def start_command(self, update, context):
+    def start_command(self, update: Update,
+                      context: CallbackContext) -> Optional[ConversationState]:
         raise NotImplementedError
 
 
 class MainViewController(AbstractViewController):
     def __init__(
-        self, delegate, russian_rules_service, book_collection_service
-    ):
+        self, delegate: MainCoordinator,
+        russian_rules_service: RussianRulesService,
+        book_collection_service: BookCollectionService
+    ) -> None:
         self.delegate = delegate
         self._russian_rules_dialogue = RussianRulesInlineDialogue(
             russian_rules_service
@@ -150,10 +182,10 @@ class MainViewController(AbstractViewController):
     menu_titles = ("Integral", "Russian rules", "Book collection")
     INTEGRAL, RUSSIAN_RULES, BOOK_COLLECTION = range(3)
 
-    def handlers(self):
+    def handlers(self) -> List[BaseHandler]:
         mts = self.menu_titles
-        handlers = [
-            MessageHandler(Filters.text(msg), conv_handler)
+        handlers: List[BaseHandler] = [
+            MessageHandler(Filters.regex(f'^{msg}$'), conv_handler)
             for msg, conv_handler in [
                 (mts[self.INTEGRAL], self.integral_command),
                 (
@@ -170,7 +202,9 @@ class MainViewController(AbstractViewController):
         handlers.extend(self._book_collection_dialogue.handlers())
         return handlers
 
-    def keyboard(self, context):
+    def keyboard(
+        self, context: CallbackContext
+    ) -> List[List[Union[str, KeyboardButton]]]:
         mts = self.menu_titles
         return [
             [mts[self.INTEGRAL]],
@@ -178,18 +212,24 @@ class MainViewController(AbstractViewController):
             [mts[self.BOOK_COLLECTION]],
         ]
 
-    def start_command(self, update, context):
+    def start_command(self, update: Update,
+                      context: CallbackContext) -> Optional[ConversationState]:
         update.message.reply_text(
             "Main menu",
             reply_markup=ReplyKeyboardMarkup(self.keyboard(context))
         )
 
-    def integral_command(self, update, context):
+    def integral_command(
+        self, update: Update, context: CallbackContext
+    ) -> Optional[ConversationState]:
         return self.delegate.integral_handler(update, context)
 
 
 class MathProblemsViewController(AbstractViewController):
-    def __init__(self, delegate, math_problems_service):
+    def __init__(
+        self, delegate: ChildCoordinator,
+        math_problems_service: MathProblemsService
+    ) -> None:
         self.delegate = delegate
         self._math_problems = math_problems_service
         self._subject_name = math_problems_service.subject_name
@@ -202,11 +242,11 @@ class MathProblemsViewController(AbstractViewController):
     )
     GET_PROBLEM, SET_CHAPTER, RESET_CHAPTER, SOLVE, THEORY = range(5)
 
-    def handlers(self):
+    def handlers(self) -> List[BaseHandler]:
         mts = self.menu_titles
         return list(
             chain([
-                MessageHandler(Filters.text(msg), conv_handler)
+                MessageHandler(Filters.regex(f'^{msg}$'), conv_handler)
                 for msg, conv_handler in [
                     (mts[self.GET_PROBLEM], self.random_problem_command),
                     (mts[self.SET_CHAPTER], self.list_chapters_command),
@@ -224,12 +264,15 @@ class MathProblemsViewController(AbstractViewController):
             ])
         )
 
-    def _viewcontroller_context(self, context):
-        return context.user_data.setdefault(
+    def _viewcontroller_context(self,
+                                context: CallbackContext) -> Dict[str, Any]:
+        return context.user_data.setdefault(  # type: ignore
             f"math_problems.{hash(self._subject_name)}", {}
         )
 
-    def keyboard(self, context):
+    def keyboard(
+        self, context: CallbackContext
+    ) -> List[List[Union[str, KeyboardButton]]]:
         viewcontroller_context = self._viewcontroller_context(context)
         chapter_is_set = viewcontroller_context.get("chapter_title")
         mts = self.menu_titles
@@ -242,16 +285,20 @@ class MathProblemsViewController(AbstractViewController):
             [mts[self.SOLVE], mts[self.THEORY], HOME_STR],
         ]
 
-    def start_command(self, update, context):
+    def start_command(self, update: Update,
+                      context: CallbackContext) -> Optional[ConversationState]:
         update.message.reply_text(
             f"{self._subject_name.capitalize()} problems",
             reply_markup=ReplyKeyboardMarkup(self.keyboard(context)),
         )
 
-    def end_command(self, update, context):
+    def end_command(self, update: Update,
+                    context: CallbackContext) -> Optional[ConversationState]:
         return self.delegate.end_handler(update, context)
 
-    def list_chapters_command(self, update, context):  # pylint: disable=unused-argument
+    def list_chapters_command(
+        self, update: Update, _: CallbackContext
+    ) -> Optional[ConversationState]:
         inline_keyboard = [[
             InlineKeyboardButton(title, callback_data=f"chapter_id: {id}")
         ] for id, title in self._chapter_titles_mapping.items()]
@@ -260,7 +307,9 @@ class MathProblemsViewController(AbstractViewController):
             reply_markup=InlineKeyboardMarkup(inline_keyboard)
         )
 
-    def set_chapter_callback(self, update, context):
+    def set_chapter_callback(
+        self, update: Update, context: CallbackContext
+    ) -> Optional[ConversationState]:
         query = update.callback_query
         print(query.data)
         viewcontroller_context = self._viewcontroller_context(context)
@@ -275,7 +324,9 @@ class MathProblemsViewController(AbstractViewController):
             reply_markup=ReplyKeyboardMarkup(self.keyboard(context)),
         )
 
-    def reset_chapter_command(self, update, context):
+    def reset_chapter_command(
+        self, update: Update, context: CallbackContext
+    ) -> Optional[ConversationState]:
         viewcontroller_context = self._viewcontroller_context(context)
         viewcontroller_context.pop("chapter_title")
         update.message.reply_text(
@@ -283,7 +334,9 @@ class MathProblemsViewController(AbstractViewController):
             reply_markup=ReplyKeyboardMarkup(self.keyboard(context))
         )
 
-    def random_problem_command(self, update, context):
+    def random_problem_command(
+        self, update: Update, context: CallbackContext
+    ) -> Optional[ConversationState]:
         viewcontroller_context = self._viewcontroller_context(context)
         chapter_title = viewcontroller_context.get("chapter_title")
         problem = self._math_problems.get_random_problem(chapter_title)
@@ -293,7 +346,9 @@ class MathProblemsViewController(AbstractViewController):
             img, reply_markup=ReplyKeyboardMarkup(self.keyboard(context))
         )
 
-    def solve_last_problem_command(self, update, context):
+    def solve_last_problem_command(
+        self, update: Update, context: CallbackContext
+    ) -> Optional[ConversationState]:
         viewcontroller_context = self._viewcontroller_context(context)
         last_problem = viewcontroller_context.get("last_problem")
         if last_problem is not None:
@@ -309,11 +364,18 @@ class MathProblemsViewController(AbstractViewController):
                     reply_markup=ReplyKeyboardMarkup(self.keyboard(context)),
                 )
 
-    def theory_for_last_problem_command(self, update, context):
+    def theory_for_last_problem_command(
+        self, update: Update, context: CallbackContext
+    ) -> Optional[ConversationState]:
         viewcontroller_context = self._viewcontroller_context(context)
-        last_problem = viewcontroller_context.get("last_problem")
-        pdf, title = self._math_problems.get_theory_pdf(
-            last_problem, return_title=True
+        last_problem = cast(
+            MathProblem, viewcontroller_context.get("last_problem")
+        )
+        pdf, title = cast(
+            Tuple[bytes, str],
+            self._math_problems.get_theory_pdf(
+                last_problem, return_title=True
+            )
         )
         update.message.reply_document(
             pdf,

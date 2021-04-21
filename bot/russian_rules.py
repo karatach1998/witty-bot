@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import Any, Dict, List, Optional
 from urllib.parse import urljoin
 
 import lxml.etree
@@ -21,7 +21,7 @@ class RulesPart(DataClassDictMixin):
 
 
 class RussianRules:
-    def __init__(self, parts, *, base_url):
+    def __init__(self, parts: List[Dict[str, Any]], *, base_url: str) -> None:
         self._parts = {
             p["title"].strip(): RulesPart.from_dict(p)
             for p in parts
@@ -30,14 +30,16 @@ class RussianRules:
 
     part_titles = property(lambda self: list(self._parts.keys()))
 
-    def list_part_chapters(self, part_title):
+    def list_part_chapters(self, part_title: str) -> List[RulesChapter]:
         return self._parts[part_title].chapters
 
-    def get_chapter_paragraphs_html(self, chapter):
+    def get_chapter_paragraphs_html(
+        self, chapter: RulesChapter
+    ) -> Optional[List[str]]:
         r = requests.get(urljoin(self._base_url, chapter.path))
 
         if not r.ok:
-            return
+            return None
 
         page = lxml.html.document_fromstring(r.text)
         body = page.find("body")

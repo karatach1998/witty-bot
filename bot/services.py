@@ -1,5 +1,8 @@
+import io
 import random
 from collections import OrderedDict
+from pathlib import Path
+from typing import Generator, List, Optional, Tuple, Union, cast
 
 import wolframalpha
 import yaml
@@ -15,7 +18,7 @@ from .utils import latex2png
 
 
 class MathProblemsService:
-    def __init__(self, subject_name):
+    def __init__(self, subject_name: str) -> None:
         self._wa_client = wolframalpha.Client(config.WOLFRAMALPHA_APP_ID)
 
         self.subject_name = subject_name
@@ -24,7 +27,7 @@ class MathProblemsService:
         problems_dir = math_subject_path / "problems"
         book_path = math_subject_path / "book.yaml"
 
-        def load_tasks(filepath):
+        def load_tasks(filepath: Path) -> List[MathTask]:
             return [
                 MathTask(
                     book_ref=BookRef(
@@ -45,7 +48,9 @@ class MathProblemsService:
 
     chapter_titles = property(lambda self: list(self._problems.keys()))
 
-    def get_random_problem(self, chapter_title=None):
+    def get_random_problem(
+        self, chapter_title: Optional[str] = None
+    ) -> MathProblem:
         if chapter_title is None:
             chapter_title = random.choice(self.chapter_titles)
         tasks = self._problems[chapter_title]
@@ -57,13 +62,18 @@ class MathProblemsService:
             book_ref=random_task.book_ref
         )
 
-    def get_problem_img(self, problem):
-        return latex2png.draw_integral_problem(problem.task, problem.problem)
+    def get_problem_img(self, problem: MathProblem) -> io.BytesIO:
+        return latex2png.draw_integral_problem(
+            problem.task, problem.problem
+        )  # type: ignore
 
-    def _make_wa_query(self, problem):
+    def _make_wa_query(self, problem: MathProblem) -> str:
         raise NotImplementedError
 
-    def get_solution_sequence(self, problem):
+    def get_solution_sequence(
+        self, problem: MathProblem
+    ) -> Generator[Tuple[str, bytes], None,
+                   None]:  # mypy: disallow_untyped_calls=false
         query = self._make_wa_query(problem)
         res = self._wa_client.query(query)
         for pod in res.results:
@@ -72,7 +82,12 @@ class MathProblemsService:
             except (StopIteration, AttributeError):
                 continue
 
-    def get_theory_pdf(self, problem, *, return_title=False):
+    def get_theory_pdf(
+        self,
+        problem: MathProblem,
+        *,
+        return_title: bool = False
+    ) -> Union[bytes, Tuple[bytes, Optional[str]]]:
         book_ref = problem.book_ref
         chapter_title, start, end = (
             book_ref.chapter_title,
@@ -96,17 +111,17 @@ class MathProblemsService:
 
 
 class IntegralProblemsService(MathProblemsService):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("integral")
 
-    def _make_wa_query(self, problem):
+    def _make_wa_query(self, problem: MathProblem) -> str:
         integral_latex = problem.problem.split("$")[1]
         integral = parse_latex(integral_latex)
         return f"integrate {maple_code(integral.function)} d{integral.free_symbols}"
 
 
 class RussianRulesService:
-    def __init__(self):
+    def __init__(self) -> None:
         metainfo_path = config.RESOURCES_PATH / "russian_rules.yaml"
         self._russian_rules = RussianRules(
             **yaml.safe_load(metainfo_path.read_text())
@@ -115,24 +130,29 @@ class RussianRulesService:
     part_titles = property(lambda self: self._russian_rules.part_titles)
 
     def get_random_paragraph_html(
-        self, part_title, *, return_chapter_title=False
-    ):
+        self,
+        part_title: str,
+        *,
+        return_chapter_title: bool = False
+    ) -> Union[Optional[str], Tuple[Optional[str], str]]:
         random_chapter = random.choice(
             self._russian_rules.list_part_chapters(part_title)
         )
         paragraphs_html = self._russian_rules.get_chapter_paragraphs_html(
             random_chapter
         )
-        paragraph_html = random.choice(paragraphs_html)
+        paragraph_html = cast(
+            Optional[str], paragraphs_html and random.choice(paragraphs_html)
+        )
         if not return_chapter_title:
             return paragraph_html
         else:
-            return random_chapter.title, paragraph_html
+            return paragraph_html, random_chapter.title
 
 
 class BookCollectionService:
-    def __init__(self):
-        def load_book(path):
+    def __init__(self) -> None:
+        def load_book(path: Path) -> Book:
             return Book(
                 BOOK_STORE_CONTAINER, **yaml.safe_load(path.read_text())
             )
@@ -149,8 +169,11 @@ class BookCollectionService:
     book_titles = property(lambda self: self._books.keys())
 
     def get_random_book_chapter_pdf(
-        self, book_title, *, return_title_tuple=False
-    ):
+        self,
+        book_title: str,
+        *,
+        return_title_tuple: bool = False
+    ) -> Union[bytes, Tuple[bytes, Tuple[str, Optional[str], str]]]:
         book = self._books[book_title]
 
         random_part = book.parts and random.choice(book.parts)
