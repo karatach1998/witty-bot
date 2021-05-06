@@ -41,13 +41,13 @@ COPY --from=build-requirements /app/requirements*.txt /app/
 ENV PROJECT_DIR=/app
 
 RUN \
-    pip install --force-reinstall --ignore-installed \
-    --no-cache-dir -r requirements.txt .
+    pip install --force-reinstall --ignore-installed --no-cache-dir \
+    --use-feature=in-tree-build -r requirements.txt .
 
 RUN \
     if [ -z "$SKIP_TEST" ]; then \
-    pip install --force-reinstall --ignore-installed \
-    --no-cache-dir -r requirements-dev.txt && \
+    pip install --force-reinstall --ignore-installed --no-cache-dir \
+    --use-feature=in-tree-build -r requirements-dev.txt && \
     pylint --rcfile=pyproject.toml **/*.py ; \
     pytest --cov=bot tests/ ; \
     pip uninstall -yr requirements-dev.txt ; else echo "Skip testing" ; fi
