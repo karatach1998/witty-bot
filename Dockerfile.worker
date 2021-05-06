@@ -4,4 +4,5 @@ FROM ${REGISTRY_URL}/witty-bot/base
 WORKDIR /app
 RUN pip install --no-cache-dir celery
 
-CMD celery -A tasks.celery worker -c 4
+CMD celery -A tasks.celery worker -c 4 \
+    --without-heartbeat --without-gossip --without-mingle
