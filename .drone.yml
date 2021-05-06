@@ -1,0 +1,86 @@
+kind: pipeline
+name: default
+type: docker
+
+steps:
+  - name: build
+    image: plugins/docker
+    settings:
+      repo: registry.heroku.com/witty-bot/base
+      registry: registry.heroku.com
+      username:
+        from_secret: heroku_email
+      password:
+        from_secret: heroku_api_key
+      tags:
+        - latest
+
+  - name: deploy web
+    image: plugins/docker
+    settings:
+      repo: registry.heroku.com/witty-bot/web
+      dockerfile: Dockerfile.web
+      build_args:
+        - REGISTRY_URL=registry.heroku.com
+      registry: registry.heroku.com
+      username:
+        from_secret: heroku_email
+      password:
+        from_secret: heroku_api_key
+      tags:
+        - ${DRONE_COMMIT_BRANCH}
+        - latest
+    depends_on: [build]
+
+  - name: deploy worker
+    image: plugins/docker
+    settings:
+      repo: registry.heroku.com/witty-bot/worker
+      dockerfile: Dockerfile.worker
+      build_args:
+        - REGISTRY_URL=registry.heroku.com
+      registry: registry.heroku.com
+      username:
+        from_secret: heroku_email
+      password:
+        from_secret: heroku_api_key
+      tags:
+        - ${DRONE_COMMIT_BRANCH}
+        - latest
+    depends_on: [build]
+
+  - name: release
+    image: alpine/httpie
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - apk add --update --no-cache docker-cli
+      - chmod +x ./heroku-release.sh
+      - ./heroku-release.sh witty-bot web worker
+    environment:
+      HEROKU_AUTH_TOKEN:
+        from_secret: heroku_auth_token
+    depends_on:
+      - deploy web
+      - deploy worker
+
+  - name: send telegram notification
+    image: appleboy/drone-telegram
+    settings:
+      token:
+        from_secret: telegram_token
+      to:
+        from_secret: telegram_user_id
+    depends_on: [release]
+    when:
+      status: [success, failure]
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+
+trigger:
+  branch: [main, ci]
+  event: push

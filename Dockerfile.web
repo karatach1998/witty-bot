@@ -1,0 +1,7 @@
+ARG REGISTRY_URL
+FROM ${REGISTRY_URL}/witty-bot/base
+
+WORKDIR /app
+RUN pip install --no-cache-dir gunicorn
+
+CMD gunicorn -b 0.0.0.0:$PORT web:app

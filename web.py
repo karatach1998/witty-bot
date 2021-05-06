@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, Response, request, send_from_directory
 
 from bot import config, enable_webhook_mode
@@ -17,7 +19,7 @@ def media(filename):
 
 
 if __name__ == '__main__':
-    app.run('localhost', 8080)
+    app.run('0.0.0.0', int(os.getenv('PORT', '8080')))
 else:
 
     @app.route(f'/{config.TELEGRAM_BOT_TOKEN}', methods=['POST'])

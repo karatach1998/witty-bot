@@ -33,6 +33,9 @@ yapf = "^0.30.0"
 toml = "^0.10.2"
 pytest-cov = "^2.11.1"
 
+[tool.pylint.message_control]
+disable = ["R,C"]
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

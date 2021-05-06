@@ -4,7 +4,8 @@ from celery import Celery
 from telegram import Bot, Update
 from telegram.ext import Dispatcher
 
-from bot import config, populate_dispatcher
+from bot import config
+from bot.handlers import populate_dispatcher
 
 bot = Bot(config.TELEGRAM_BOT_TOKEN)
 dispatcher = Dispatcher(bot, None, workers=0)
