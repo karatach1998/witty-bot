@@ -37,6 +37,7 @@ mypy = "^0.812"
 [mypy]
 ignore_missing_imports = true
 warn_no_return = false
+no_implicit_optional = true
 
 [tool.pylint.message_control]
 disable = ["R,C"]
