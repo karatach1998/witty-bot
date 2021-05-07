@@ -63,9 +63,9 @@ class MathProblemsService:
         )
 
     def get_problem_img(self, problem: MathProblem) -> io.BytesIO:
-        return latex2png.draw_integral_problem(
+        return latex2png.draw_integral_problem(  # type: ignore
             problem.task, problem.problem
-        )  # type: ignore
+        )
 
     def _make_wa_query(self, problem: MathProblem) -> str:
         raise NotImplementedError
