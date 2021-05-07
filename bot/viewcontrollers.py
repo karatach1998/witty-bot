@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import io
 from itertools import chain
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union, cast
@@ -89,8 +90,11 @@ class RussianRulesInlineDialogue(AbstractInlineDialogue):
             )
         )
 
-        chat_id = update.effective_message.chat_id  # type: ignore
-        html_file_name = f"russian_rules-{chat_id}.html"
+        if html is None:
+            return None
+
+        html_hash = hashlib.md5(html.encode('utf-8')).hexdigest()
+        html_file_name = f"russian_rules-{html_hash}.html"
         html_file_url = urljoin(
             config.APP_BASE_URL, f"{config.MEDIA_URL}/{html_file_name}"
         )
