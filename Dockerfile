@@ -34,14 +34,17 @@ FROM python:${PYTHON_VERSION}-slim
 
 ARG SKIP_TEST
 
-WORKDIR /app
-COPY . /app
-COPY --from=build-requirements /app/requirements*.txt /app/
-
 ENV PROJECT_DIR=/app
+WORKDIR /app
 
+COPY --from=build-requirements /app/requirements*.txt /app/
 RUN \
     pip install --force-reinstall --ignore-installed --no-cache-dir \
+    --use-feature=in-tree-build -r requirements.txt
+
+COPY . /app
+RUN \
+    pip install --no-cache-dir \
     --use-feature=in-tree-build -r requirements.txt .
 
 RUN \
@@ -49,6 +52,7 @@ RUN \
     pip install --force-reinstall --ignore-installed --no-cache-dir \
     --use-feature=in-tree-build -r requirements-dev.txt && \
     pylint --rcfile=pyproject.toml **/*.py ; \
+    mypy --config-file=pyproject.toml -p bot --exclude 'utils/.*\\.py' && \
     pytest --cov=bot tests/ ; \
     pip uninstall -yr requirements-dev.txt ; else echo "Skip testing" ; fi
 
