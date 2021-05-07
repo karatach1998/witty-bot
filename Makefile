@@ -4,4 +4,4 @@ rundev:
 	docker-compose -f docker-compose-dev.yml up --build
 
 deploy:
-	drone exec --trusted --secret-file .drone_secret .drone.yml
+	drone exec --trusted --secret-file .drone_secrets .drone.yml
