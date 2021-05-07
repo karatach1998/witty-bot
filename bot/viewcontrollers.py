@@ -29,6 +29,7 @@ if TYPE_CHECKING:
     from .coordinators import AbstractCoordinator, ChildCoordinator, MainCoordinator
     from .services import (
         BookCollectionService,
+        EnglishGrammarService,
         MathProblemsService,
         RussianRulesService,
     )
@@ -105,14 +106,15 @@ class RussianRulesInlineDialogue(AbstractInlineDialogue):
 class BookCollectionInlineDialogue(AbstractInlineDialogue):
     def __init__(self, book_collection_service: BookCollectionService) -> None:
         self._book_collection = book_collection_service
-        self._book_titles_mapping = dict(
-            enumerate(book_collection_service.book_titles)
+        self._book_collection_mapping = dict(
+            enumerate(self._book_collection.book_titles)
         )
+        self._id = hex(hash(book_collection_service))[-4:]
 
     def handlers(self) -> List[CallbackQueryHandler]:
         return [
             CallbackQueryHandler(
-                self.get_book_callback, pattern=r"^book_id: \d+$"
+                self.get_book_callback, pattern=fr"^{self._id}\.book_id: \d+$"
             )
         ]
 
@@ -120,8 +122,10 @@ class BookCollectionInlineDialogue(AbstractInlineDialogue):
         self, update: Update, context: CallbackContext
     ) -> Optional[ConversationState]:
         inline_keyboard = [[
-            InlineKeyboardButton(title, callback_data=f"book_id: {id}")
-        ] for id, title in self._book_titles_mapping.items()]
+            InlineKeyboardButton(
+                title, callback_data=f"{self._id}.book_id: {id}"
+            )
+        ] for id, title in self._book_collection_mapping.items()]
         update.message.reply_text(
             "Выберите книгу",
             reply_markup=InlineKeyboardMarkup(inline_keyboard)
@@ -131,8 +135,8 @@ class BookCollectionInlineDialogue(AbstractInlineDialogue):
         query = update.callback_query
         query.answer("Загрузка...")
 
-        book_id = yaml.safe_load(query.data).get("book_id")
-        book_title = self._book_titles_mapping[book_id]
+        book_id = yaml.safe_load(query.data).get(f"{self._id}.book_id")
+        book_title = self._book_collection_mapping[book_id]
         chapter_pdf, title_tuple = cast(
             Tuple[bytes, Tuple[str, Optional[str], str]],
             self._book_collection.get_random_book_chapter_pdf(
@@ -168,6 +172,7 @@ class MainViewController(AbstractViewController):
     def __init__(
         self, delegate: MainCoordinator,
         russian_rules_service: RussianRulesService,
+        english_grammar_service: EnglishGrammarService,
         book_collection_service: BookCollectionService
     ) -> None:
         self.delegate = delegate
@@ -177,9 +182,12 @@ class MainViewController(AbstractViewController):
         self._book_collection_dialogue = BookCollectionInlineDialogue(
             book_collection_service
         )
+        self._english_grammar_dialogue = BookCollectionInlineDialogue(
+            english_grammar_service
+        )
 
-    menu_titles = ("Integral", "Russian rules", "Book collection")
-    INTEGRAL, RUSSIAN_RULES, BOOK_COLLECTION = range(3)
+    menu_titles = ("Integral", "Russian", "English", "Book collection")
+    INTEGRAL, RUSSIAN_RULES, ENGLISH_GRAMMAR, BOOK_COLLECTION = range(4)
 
     def handlers(self) -> List[Handler[Update]]:
         mts = self.menu_titles
@@ -192,12 +200,17 @@ class MainViewController(AbstractViewController):
                     self._russian_rules_dialogue.start_dialogue_command
                 ),
                 (
+                    mts[self.ENGLISH_GRAMMAR],
+                    self._english_grammar_dialogue.start_dialogue_command
+                ),
+                (
                     mts[self.BOOK_COLLECTION],
                     self._book_collection_dialogue.start_dialogue_command
                 ),
             ]
         ]
         handlers.extend(self._russian_rules_dialogue.handlers())
+        handlers.extend(self._english_grammar_dialogue.handlers())
         handlers.extend(self._book_collection_dialogue.handlers())
         return handlers
 
@@ -207,7 +220,7 @@ class MainViewController(AbstractViewController):
         mts = self.menu_titles
         return [
             [mts[self.INTEGRAL]],
-            [mts[self.RUSSIAN_RULES]],
+            [mts[self.RUSSIAN_RULES], mts[self.ENGLISH_GRAMMAR]],
             [mts[self.BOOK_COLLECTION]],
         ]
 

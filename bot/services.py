@@ -17,6 +17,10 @@ from .russian_rules import RussianRules
 from .utils import latex2png
 
 
+def load_book(path: Path) -> Book:
+    return Book(BOOK_STORE_CONTAINER, **yaml.safe_load(path.read_text()))
+
+
 class MathProblemsService:
     def __init__(self, subject_name: str) -> None:
         self._wa_client = wolframalpha.Client(config.WOLFRAMALPHA_APP_ID)
@@ -151,17 +155,12 @@ class RussianRulesService:
 
 
 class BookCollectionService:
-    def __init__(self) -> None:
-        def load_book(path: Path) -> Book:
-            return Book(
-                BOOK_STORE_CONTAINER, **yaml.safe_load(path.read_text())
-            )
-
+    def __init__(self, books_path: Path = config.BOOKS_PATH) -> None:
         self._books = OrderedDict(
             list(
                 map(
                     lambda b: (b.title, b),
-                    map(load_book, config.BOOKS_PATH.iterdir())
+                    map(load_book, books_path.iterdir())
                 )
             )
         )
@@ -193,3 +192,8 @@ class BookCollectionService:
                     random_chapter.title,
                 ),
             )
+
+
+class EnglishGrammarService(BookCollectionService):
+    def __init__(self) -> None:
+        super().__init__(config.RESOURCES_PATH / "english")

@@ -9,6 +9,7 @@ from telegram.ext import CallbackContext, CommandHandler, ConversationHandler, H
 
 from .services import (
     BookCollectionService,
+    EnglishGrammarService,
     IntegralProblemsService,
     RussianRulesService,
 )
@@ -38,9 +39,11 @@ class AbstractCoordinator:
 class MainCoordinator(AbstractCoordinator):
     def __init__(self) -> None:
         russian_rules_service = RussianRulesService()
+        english_grammar_service = EnglishGrammarService()
         book_collection_service = BookCollectionService()
         self.viewcontroller = MainViewController(
-            self, russian_rules_service, book_collection_service
+            self, russian_rules_service, english_grammar_service,
+            book_collection_service
         )
 
         self._integral_coordinator = IntegralCoordinator(self)
