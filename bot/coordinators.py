@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import timedelta
 from itertools import chain
-from typing import Iterable, List, TypeVar
+from typing import Iterable, List
 
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler, ConversationHandler, Handler
@@ -18,8 +18,6 @@ from .viewcontrollers import (
     MathProblemsViewController,
 )
 
-BaseHandler = TypeVar('BaseHandler', bound=Handler[Update])
-
 
 class AbstractCoordinator:
     viewcontroller: AbstractViewController
@@ -27,7 +25,7 @@ class AbstractCoordinator:
     def iter_children(self) -> Iterable[AbstractCoordinator]:
         raise NotImplementedError
 
-    def handlers(self) -> List[BaseHandler]:
+    def handlers(self) -> List[Handler[Update]]:
         return self.viewcontroller.handlers()
 
     def start(

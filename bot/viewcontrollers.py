@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import io
 from itertools import chain
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union, cast
 from urllib.parse import urljoin
 
 import requests
@@ -33,7 +33,6 @@ if TYPE_CHECKING:
         RussianRulesService,
     )
     ConversationState = AbstractCoordinator
-    BaseHandler = TypeVar('BaseHandler', bound=Handler[Update])
 
 HOME_STR = "\U0001F3E0"
 
@@ -152,7 +151,7 @@ class BookCollectionInlineDialogue(AbstractInlineDialogue):
 
 
 class AbstractViewController:
-    def handlers(self) -> List[BaseHandler]:
+    def handlers(self) -> List[Handler[Update]]:
         raise NotImplementedError
 
     def keyboard(
@@ -182,9 +181,9 @@ class MainViewController(AbstractViewController):
     menu_titles = ("Integral", "Russian rules", "Book collection")
     INTEGRAL, RUSSIAN_RULES, BOOK_COLLECTION = range(3)
 
-    def handlers(self) -> List[BaseHandler]:
+    def handlers(self) -> List[Handler[Update]]:
         mts = self.menu_titles
-        handlers: List[BaseHandler] = [
+        handlers: List[Handler[Update]] = [
             MessageHandler(Filters.regex(f'^{msg}$'), conv_handler)
             for msg, conv_handler in [
                 (mts[self.INTEGRAL], self.integral_command),
@@ -242,7 +241,7 @@ class MathProblemsViewController(AbstractViewController):
     )
     GET_PROBLEM, SET_CHAPTER, RESET_CHAPTER, SOLVE, THEORY = range(5)
 
-    def handlers(self) -> List[BaseHandler]:
+    def handlers(self) -> List[Handler[Update]]:
         mts = self.menu_titles
         return list(
             chain([
